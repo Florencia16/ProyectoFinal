@@ -14,7 +14,16 @@ namespace PROYECTO1
         {
             this.Personajes = new List<Personaje>(); 
         }
+        private static Manejador instancia;
 
+        public static Manejador getInstancia()
+        {
+            if (instancia == null)
+            {
+                instancia = new Manejador();
+            }
+            return instancia;
+        }
 
         public void AgregarPersonaje(Personaje p)
         {
@@ -33,6 +42,10 @@ namespace PROYECTO1
             return (Personajes.Exists(x => x.Nombre == elpersonaje.Nombre));
         }
 
+        public bool NomEsta(string nombre)
+        {
+            return (Personajes.Exists(x => x.Nombre == nombre));
+        }
 
     }
 }
