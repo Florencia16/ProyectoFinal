@@ -9,7 +9,13 @@ namespace PROYECTO1
     class Controlador : IDPersonaje 
     {
 
+        public Manejador Mp;
+        private Manejador ()
+        {
 
+        }
+        // se tiene que modificar dado que si bien muestra hay cosas que arreglar como el rango de entrada de las caracteristicas 
+        // fijas y cargar el personaje 
         public void CrearPersonaje()
         {
            
@@ -41,10 +47,15 @@ namespace PROYECTO1
        
 
             Personaje nuevoPersonaje = new Personaje(id, elnombre,niv,fue,des,con, inte, sab,car);
-            return nuevoPersonaje;
+            
             
         }
 
+        
+        public void ModificarPersoaje (){
+
+
+        }
 
 
     }

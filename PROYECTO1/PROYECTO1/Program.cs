@@ -12,7 +12,7 @@ namespace PROYECTO1
         {
             Fabrica fabrica = new Fabrica();
             IDPersonaje controlador = fabrica.GetControladorPersonaje();
-            controlador.AltaPersonaje();
+            controlador.CrearPersonaje();
         }
     }
 }

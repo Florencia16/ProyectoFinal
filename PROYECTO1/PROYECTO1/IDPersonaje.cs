@@ -8,7 +8,7 @@ namespace PROYECTO1
 {
     public interface IDPersonaje
     {
-        void AltaPersonaje();
+        void CrearPersonaje();
 
     }
 }

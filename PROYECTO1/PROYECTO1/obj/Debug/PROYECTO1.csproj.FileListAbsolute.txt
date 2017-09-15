@@ -1,1 +1,7 @@
 C:\Users\Ceibal\Desktop\PROYECTO1\PROYECTO1\obj\Debug\PROYECTO1.csprojResolveAssemblyReference.cache
+C:\Users\Ceibal\Documents\GitHub\ProyectoFinal\PROYECTO1\PROYECTO1\bin\Debug\PROYECTO1.exe.config
+C:\Users\Ceibal\Documents\GitHub\ProyectoFinal\PROYECTO1\PROYECTO1\bin\Debug\PROYECTO1.exe
+C:\Users\Ceibal\Documents\GitHub\ProyectoFinal\PROYECTO1\PROYECTO1\bin\Debug\PROYECTO1.pdb
+C:\Users\Ceibal\Documents\GitHub\ProyectoFinal\PROYECTO1\PROYECTO1\obj\Debug\PROYECTO1.csprojResolveAssemblyReference.cache
+C:\Users\Ceibal\Documents\GitHub\ProyectoFinal\PROYECTO1\PROYECTO1\obj\Debug\PROYECTO1.exe
+C:\Users\Ceibal\Documents\GitHub\ProyectoFinal\PROYECTO1\PROYECTO1\obj\Debug\PROYECTO1.pdb
