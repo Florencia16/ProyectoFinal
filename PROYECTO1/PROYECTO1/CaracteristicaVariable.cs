@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PROYECTO1
 {
-    class CaracteristicaVariable
+    public class CaracteristicaVariable
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
