@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PROYECTO1
 {
-    class Personaje
+   public class Personaje
     {
         
         public int Id { get; set;}
@@ -18,6 +18,7 @@ namespace PROYECTO1
         public int Inteligencia { get; set; }
         public int Sabiduria { get; set; }
         public int Carisma { get; set; } 
+		public List<HabilidadEspecial> habilidadesEspeciales { get; set; }
         
 
         public Personaje(int id, string nombre, int nivel, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma)
@@ -31,6 +32,7 @@ namespace PROYECTO1
             this.Inteligencia = inteligencia;
             this.Sabiduria = sabiduria;
             this.Carisma = carisma;
+		
         }
 
     }
