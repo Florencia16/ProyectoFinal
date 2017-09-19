@@ -9,7 +9,7 @@ namespace PROYECTO1
     class Controlador : IDPersonaje 
     {
         // IMMPORTANTE FUNCONALIDAD CREAR PERSONAJE
-        //Falta ver tema de mayusculas y minusculas con la busqueda de nombre, ver id si se ingresa por consola o averiguar si se debe incrementar automaticamente y ver hacer try catch cuando son letras y tienen que ser numeros 
+        //Falta ver tema de mayusculas y minusculas con la busqueda de nombre, ver id si se ingresa por consola o averiguar si se debe incrementar automaticamente y ver hacer try catch O TRY PARSE cuando son letras y tienen que ser numeros 
        
        
         //Funcionalidad para crear Personaje en el Sistema, no deja cargar un nuevo personaje con un mismo nombre ya existente en el sistema.
@@ -23,7 +23,7 @@ namespace PROYECTO1
             string elnombre = Console.ReadLine();
             while (mp.NomEsta(elnombre))
             {
-                Console.WriteLine("Ya existe en el sistema un Personaje con el ese nombre : {0} por favor ingrese otro", elnombre);
+                Console.WriteLine("Ya existe en el sistema un Personaje con ese nombre : {0} por favor ingrese otro", elnombre);
                 elnombre = Console.ReadLine();
 
 
@@ -84,7 +84,7 @@ namespace PROYECTO1
 
         }
 
-        
+       
         public void ModificarPersoaje (){
             Manejador mp = Manejador.getInstancia();
             
