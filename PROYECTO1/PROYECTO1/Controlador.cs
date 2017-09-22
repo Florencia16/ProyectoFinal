@@ -17,7 +17,13 @@ namespace PROYECTO1
             string nombre = Console.ReadLine();
             Console.WriteLine("Ingrese una breve descripcion de esta Habilidad Especial");
             string descricpion = Console.ReadLine();
-            mp.AgregarHabilidadEspecial(new HabilidadEspecial(nombre, descricpion));
+            int id = mp.HabilidadesEspeciales.Count + 1;
+            mp.AgregarHabilidadEspecial(new HabilidadEspecial(id, nombre, descricpion));
+            // se carga la nueva habilidad especial a todos los personajes creados hasta el momento 
+            foreach (Personaje p in mp.Personajes)
+            {
+                p.LaClase.habilidadesEspeciales.Add(new HabilidadEspecial(id, nombre, descricpion)); 
+            }
         }
 
 
@@ -28,7 +34,7 @@ namespace PROYECTO1
             string nombre = Console.ReadLine(); 
             if (mp.NomEstaHE(nombre))
             {
-                // ver que se desea modificar y realizar set 
+                // mostrar ver que se desea modificar y realizar set 
             }
         }
         public void ListarHabilidadesEspeciales()
@@ -162,8 +168,6 @@ namespace PROYECTO1
 
 
             }
-            Console.WriteLine("Ingrese ID");
-            int id = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese Nivel");
             int niv = int.Parse(Console.ReadLine());
             Console.WriteLine("Ingrese valor Fuerza");
@@ -213,6 +217,7 @@ namespace PROYECTO1
                 car = int.Parse(Console.ReadLine());
 
             }
+            int id = mp.Personajes.Count + 1;
 
            mp.AgregarPersonaje(new Personaje (id, elnombre,niv,fue,des,con, inte, sab,car));         
 

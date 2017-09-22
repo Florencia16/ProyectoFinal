@@ -15,11 +15,17 @@ namespace PROYECTO1
             Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("---------------------------BIENVENIDO-----------------------------------------");
             Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine("1- PERSONAJE ");
+            Console.WriteLine("2- CARACTERISTIVA VARIABLE ");
+            Console.WriteLine("2- RAZA");
+            Console.WriteLine("3- CLASE ");
+            Console.WriteLine("4- HABILIDAD ESPECIAL");
+            
             Console.WriteLine("Ingrese la opción deseada:  ");
             int opcion = int.Parse(Console.ReadLine());
             switch (opcion)
             {
-                case '1':
+                case '1':   
                             break;
                 case '2':
                             break;
@@ -27,11 +33,13 @@ namespace PROYECTO1
                             break;
                 case '4':
                             break;
+                default:Console.WriteLine("La opcion ingresada no es correcta - intenta nuevamente!!!"); 
+                    break; 
 
             }
 
             controlador.CrearHabilidadEspecial();
-            controlador.CrearHabilidadEspecial();
+         
             controlador.ListarHabilidadesEspeciales();
             Console.ReadKey();
 
