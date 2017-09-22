@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace PROYECTO1
 {
-   public class Raza
+    public class Personaje_Caracteristica
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
+        public int valor { get; set; }
     }
 }

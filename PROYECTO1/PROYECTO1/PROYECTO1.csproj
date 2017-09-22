@@ -49,6 +49,7 @@
     <Compile Include="Controlador.cs" />
     <Compile Include="IDPersonaje.cs" />
     <Compile Include="Manejador.cs" />
+    <Compile Include="Personaje-Caracteristica.cs" />
     <Compile Include="Personaje.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

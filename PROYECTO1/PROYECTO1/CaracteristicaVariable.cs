@@ -10,6 +10,7 @@ namespace PROYECTO1
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-
+        public Personaje_Caracteristica valor { get; set; }
+        
     }
 }

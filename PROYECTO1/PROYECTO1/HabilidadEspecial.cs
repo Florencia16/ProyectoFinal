@@ -11,6 +11,12 @@ namespace PROYECTO1
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+
+        public HabilidadEspecial (string nombre, string descripcion)
+        {
+            this.Nombre = nombre;
+            this.Descripcion = descripcion;
+        }
 		
     }
 }

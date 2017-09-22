@@ -6,22 +6,156 @@ using System.Threading.Tasks;
 
 namespace PROYECTO1
 {
-    class Controlador : IDPersonaje 
+    public class Controlador : IDPersonaje 
     {
+
+
+        public void CrearHabilidadEspecial()
+        {
+            Manejador mp = Manejador.getInstancia();
+            Console.WriteLine("Ingrese el nombre de la Habilidad Especial");
+            string nombre = Console.ReadLine();
+            Console.WriteLine("Ingrese una breve descripcion de esta Habilidad Especial");
+            string descricpion = Console.ReadLine();
+            mp.AgregarHabilidadEspecial(new HabilidadEspecial(nombre, descricpion));
+        }
+
+
+        public void ModificarHabilidadEspecial()
+        {
+            Manejador mp = Manejador.getInstancia();
+            Console.WriteLine(" Ingrese el nombre: ");
+            string nombre = Console.ReadLine(); 
+            if (mp.NomEstaHE(nombre))
+            {
+                // ver que se desea modificar y realizar set 
+            }
+        }
+        public void ListarHabilidadesEspeciales()
+        {
+            Manejador mp = Manejador.getInstancia();
+            foreach (HabilidadEspecial HE in mp.HabilidadesEspeciales)
+            {
+                Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", HE.Id, HE.Nombre, HE.Descripcion); 
+            }
+
+        }
+
+
+        public void ListarHabilidadEspecialPorClase()
+        {
+            Manejador mp = Manejador.getInstancia();
+            
+
+
+        }
+        public void EliminarHabilidadEspecial()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+
+        public void CrearClase()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+
+        public void ModificarClase()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void ListarClases()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void EliminarClase()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void CrearRaza()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void ModificarRaza()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void ListarRazas()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void EliminarRaza()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void CrearCaracteristica()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void ModificarCarateristica()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void ListarCaracteristicas()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void EliminarCaracteristica()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
         // IMMPORTANTE FUNCONALIDAD CREAR PERSONAJE
         //Falta ver tema de mayusculas y minusculas con la busqueda de nombre, ver id si se ingresa por consola o averiguar si se debe incrementar automaticamente y ver hacer try catch O TRY PARSE cuando son letras y tienen que ser numeros 
-       
-       
+
+
         //Funcionalidad para crear Personaje en el Sistema, no deja cargar un nuevo personaje con un mismo nombre ya existente en el sistema.
         public void CrearPersonaje()
         {
             Manejador mp = Manejador.getInstancia();
-            Console.WriteLine("------------------------------------------------------------------------");
-            Console.WriteLine("----------------------Alta Personaje------------------------------------");
-            Console.WriteLine("------------------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine("----------------------------Alta Personaje------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("Ingrese Nombre");
             string elnombre = Console.ReadLine();
-            while (mp.NomEsta(elnombre))
+            while (mp.NomEstaP(elnombre))
             {
                 Console.WriteLine("Ya existe en el sistema un Personaje con ese nombre : {0} por favor ingrese otro", elnombre);
                 elnombre = Console.ReadLine();
@@ -85,13 +219,41 @@ namespace PROYECTO1
         }
 
        
-        public void ModificarPersoaje (){
+        public void ModificarPersonaje(){
             Manejador mp = Manejador.getInstancia();
             
 
 
         }
+        public void ListarPersonajes()
+        {
+            Manejador mp = Manejador.getInstancia();
 
 
+
+        }
+        public void ListarPersonajeClase()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void ListarPersonajeRaza()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+        public void EliminarPersonaje()
+        {
+            Manejador mp = Manejador.getInstancia();
+
+
+
+        }
+
+       
     }
 }

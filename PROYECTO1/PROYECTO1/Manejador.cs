@@ -10,9 +10,15 @@ namespace PROYECTO1
     {
         public List<Personaje> Personajes;
 
+        public List<Raza> Razas;
+
+        public List<HabilidadEspecial> HabilidadesEspeciales; 
+
         private Manejador()
         {
-            this.Personajes = new List<Personaje>(); 
+            this.Personajes = new List<Personaje>();
+            this.Razas = new List<Raza>();
+            this.HabilidadesEspeciales = new List<HabilidadEspecial>();
         }
         private static Manejador instancia;
 
@@ -27,7 +33,7 @@ namespace PROYECTO1
 
         public void AgregarPersonaje(Personaje p)
         {
-            if (!Esta(p))
+            if (!EstaP(p))
             {
                 this.Personajes.Add(p);
             }
@@ -37,14 +43,36 @@ namespace PROYECTO1
             }
         }
 
-        public bool Esta (Personaje elpersonaje)
+        public bool EstaP (Personaje elpersonaje)
         {
             return (Personajes.Exists(x => x.Nombre == elpersonaje.Nombre));
         }
 
-        public bool NomEsta(string nombre)
+        public bool NomEstaP(string nombre)
         {
             return (Personajes.Exists(x => x.Nombre == nombre));
+        }
+
+        public bool EstaHE (HabilidadEspecial LaHabilidadEspecial)
+        {
+            return (HabilidadesEspeciales.Exists(x => x.Nombre == LaHabilidadEspecial.Nombre));
+        }
+
+        public bool NomEstaHE( string nombre)
+        {
+            return (HabilidadesEspeciales.Exists(x => x.Nombre == nombre));
+        }
+
+        public void AgregarHabilidadEspecial(HabilidadEspecial h)
+        {
+            if (!EstaHE(h))
+            {
+                this.HabilidadesEspeciales.Add(h);
+            }
+            else
+            {
+                throw new Exception("Ya existe un Habilidad Especial con ese nombre");
+            }
         }
 
     }

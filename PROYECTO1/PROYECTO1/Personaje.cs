@@ -18,11 +18,9 @@ namespace PROYECTO1
         public int Inteligencia { get; set; }
         public int Sabiduria { get; set; }
         public int Carisma { get; set; } 
-        //ACA PARA MI IRIA UNA LISTA DE CARACTERISTICAS VARIABLES Y UNA OBJETO DE TIPO CLASE CON UNA LISTA DE HABILIDADES ESPECIALES POR CLASE DADO QUE UN PERSONAJE ES DE UNA CLASE
-        // Y TAMBIEN IRIA UN OBJETO DE TIPO RAZA DADO QUE UN PERSONAJE PERTENECE A UNA RAZA Y CON ESO SE REALIZA LA MEJORA 
-
-		public List<HabilidadEspecial> habilidadesEspeciales { get; set; }
-        
+        public List <CaracteristicaVariable> CaracteristicasVariables { get; set; }
+        public Raza LaRaza { get; set; }
+        public Clase LaClase { get; set; }
 
         public Personaje(int id, string nombre, int nivel, int fuerza, int destreza, int constitucion, int inteligencia, int sabiduria, int carisma)
         {
