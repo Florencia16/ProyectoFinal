@@ -113,8 +113,7 @@ namespace PROYECTO1
 			});
 
 
-
-		}
+        }
 
         public void ModificarClase()
         {
