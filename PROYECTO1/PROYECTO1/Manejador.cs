@@ -111,7 +111,29 @@ namespace PROYECTO1
 			{
 				throw new Exception("Ya existe una CaracteristicaVariable con ese nombre");
 
+<<<<<<< HEAD
 			}
 		}
 	}
+=======
+        public int posicionHE ( String nombre)
+        {
+            int pos=0;
+            foreach(HabilidadEspecial h in HabilidadesEspeciales)
+            {
+                if ( h.Nombre != nombre)
+                {
+                    pos++;
+                }
+                else
+                {
+                    return pos; 
+                }
+
+            }
+            return pos;    
+        }
+
+    }
+>>>>>>> 6222be544f7672eb42a5cf4020af7f15f7edf302
 }
