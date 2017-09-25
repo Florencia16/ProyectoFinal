@@ -12,13 +12,16 @@ namespace PROYECTO1
 
         public List<Raza> Razas;
 
-        public List<HabilidadEspecial> HabilidadesEspeciales; 
-
-        private Manejador()
+		public List<CaracteristicaVariable> caracteristicasVariables;
+        public List<HabilidadEspecial> HabilidadesEspeciales;
+		public List<Clase> Clases;
+		private Manejador()
         {
             this.Personajes = new List<Personaje>();
             this.Razas = new List<Raza>();
             this.HabilidadesEspeciales = new List<HabilidadEspecial>();
+			this.Clases = new List<Clase>();
+			this.caracteristicasVariables = new List<CaracteristicaVariable>();
         }
         private static Manejador instancia;
 
@@ -74,6 +77,41 @@ namespace PROYECTO1
                 throw new Exception("Ya existe un Habilidad Especial con ese nombre");
             }
         }
+		public void AgregarClase(Clase h)
+		{
+			if (!(Clases.Exists(x => x.Nombre == h.Nombre)))
+			{
+				this.Clases.Add(h);
+			}
+			else
+			{
+				throw new Exception("Ya existe una clase con ese nombre");
 
-    }
+			}
+		}
+		public void AgregarRaza(Raza h)
+		{
+			if (!(Razas.Exists(x => x.Nombre == h.Nombre)))
+			{
+				this.Razas.Add(h);
+			}
+			else
+			{
+				throw new Exception("Ya existe una Raza con ese nombre");
+
+			}
+		}
+		public void AgregarCaracteristicaVariable(CaracteristicaVariable h)
+		{
+			if (!(caracteristicasVariables.Exists(x => x.Nombre == h.Nombre)))
+			{
+				this.caracteristicasVariables.Add(h);
+			}
+			else
+			{
+				throw new Exception("Ya existe una CaracteristicaVariable con ese nombre");
+
+			}
+		}
+	}
 }

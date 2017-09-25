@@ -30,10 +30,11 @@ namespace PROYECTO1
 
             }
 
-            controlador.CrearHabilidadEspecial();
-            controlador.CrearHabilidadEspecial();
-            controlador.ListarHabilidadesEspeciales();
-            Console.ReadKey();
+			//            controlador.CrearHabilidadEspecial();
+			//          controlador.CrearHabilidadEspecial();
+			//        controlador.ListarHabilidadesEspeciales();
+			controlador.CrearClase();
+			Console.ReadKey();
 
         }
     }

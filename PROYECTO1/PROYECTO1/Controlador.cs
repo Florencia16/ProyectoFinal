@@ -59,11 +59,19 @@ namespace PROYECTO1
 
         public void CrearClase()
         {
-            Manejador mp = Manejador.getInstancia();
+			Manejador mp = Manejador.getInstancia();
+			Console.WriteLine("Ingrese el nombre de la Clase");
+			string nombre = Console.ReadLine();
+			Console.WriteLine("Ingrese una breve descripcion de esta Clase");
+			string descricpion = Console.ReadLine();
+			mp.AgregarClase(new Clase{
+				Nombre = nombre,
+				Descripcion = descricpion
+			});
 
 
 
-        }
+		}
 
         public void ModificarClase()
         {
@@ -74,11 +82,15 @@ namespace PROYECTO1
         }
         public void ListarClases()
         {
-            Manejador mp = Manejador.getInstancia();
+			Manejador mp = Manejador.getInstancia();
+			foreach (Clase HE in mp.Clases)
+			{
+				Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", HE.Id, HE.Nombre, HE.Descripcion);
+			}
 
 
 
-        }
+		}
         public void EliminarClase()
         {
             Manejador mp = Manejador.getInstancia();
@@ -88,11 +100,20 @@ namespace PROYECTO1
         }
         public void CrearRaza()
         {
-            Manejador mp = Manejador.getInstancia();
+			Manejador mp = Manejador.getInstancia();
+			Console.WriteLine("Ingrese el nombre de la Raza");
+			string nombre = Console.ReadLine();
+			Console.WriteLine("Ingrese una breve descripcion de esta Raza");
+			string descricpion = Console.ReadLine();
+			mp.AgregarRaza(new Raza
+			{
+				Nombre = nombre,
+				Descripcion = descricpion
+			});
 
 
 
-        }
+		}
         public void ModificarRaza()
         {
             Manejador mp = Manejador.getInstancia();
@@ -102,11 +123,15 @@ namespace PROYECTO1
         }
         public void ListarRazas()
         {
-            Manejador mp = Manejador.getInstancia();
+			Manejador mp = Manejador.getInstancia();
+			foreach (Raza HE in mp.Razas)
+			{
+				Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", HE.Id, HE.Nombre, HE.Descripcion);
+			}
 
 
 
-        }
+		}
         public void EliminarRaza()
         {
             Manejador mp = Manejador.getInstancia();
@@ -116,11 +141,19 @@ namespace PROYECTO1
         }
         public void CrearCaracteristica()
         {
-            Manejador mp = Manejador.getInstancia();
+
+			Manejador mp = Manejador.getInstancia();
+			Console.WriteLine("Ingrese el nombre de la Caracteristica Variable");
+			string nombre = Console.ReadLine();
+			mp.AgregarCaracteristicaVariable(new CaracteristicaVariable
+			{
+				Nombre = nombre
+
+			});
 
 
 
-        }
+		}
         public void ModificarCarateristica()
         {
             Manejador mp = Manejador.getInstancia();
@@ -130,11 +163,15 @@ namespace PROYECTO1
         }
         public void ListarCaracteristicas()
         {
-            Manejador mp = Manejador.getInstancia();
+			Manejador mp = Manejador.getInstancia();
+			foreach (CaracteristicaVariable HE in mp.caracteristicasVariables)
+			{
+				Console.WriteLine("Id - {0} Nombre - {1}  ", HE.Id, HE.Nombre);
+			}
 
 
 
-        }
+		}
         public void EliminarCaracteristica()
         {
             Manejador mp = Manejador.getInstancia();
@@ -227,11 +264,15 @@ namespace PROYECTO1
         }
         public void ListarPersonajes()
         {
-            Manejador mp = Manejador.getInstancia();
+			Manejador mp = Manejador.getInstancia();
+			foreach (Personaje HE in mp.Personajes)
+			{
+				Console.WriteLine("Id - {0} Nombre - {1} ", HE.Id, HE.Nombre);
+			}
 
 
 
-        }
+		}
         public void ListarPersonajeClase()
         {
             Manejador mp = Manejador.getInstancia();
