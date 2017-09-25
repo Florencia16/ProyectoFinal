@@ -37,19 +37,16 @@ namespace PROYECTO1
                     break; 
 
             }
-
-<<<<<<< HEAD
 			//            controlador.CrearHabilidadEspecial();
 			//          controlador.CrearHabilidadEspecial();
 			//        controlador.ListarHabilidadesEspeciales();
 			controlador.CrearClase();
 			Console.ReadKey();
-=======
             controlador.CrearHabilidadEspecial();
          
             controlador.ListarHabilidadesEspeciales();
             Console.ReadKey();
->>>>>>> 6222be544f7672eb42a5cf4020af7f15f7edf302
+
 
         }
     }
