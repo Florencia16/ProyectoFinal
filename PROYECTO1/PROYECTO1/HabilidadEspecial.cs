@@ -18,6 +18,11 @@ namespace PROYECTO1
             this.Nombre = nombre;
             this.Descripcion = descripcion;
         }
-		
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
     }
 }

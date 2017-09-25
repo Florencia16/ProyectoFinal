@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PROYECTO1
 {
-    public class Controlador : IDPersonaje 
+    public class Controlador : IDPersonaje
     {
 
-
+        //terminada :) 
         public void CrearHabilidadEspecial()
         {
             Manejador mp = Manejador.getInstancia();
@@ -19,24 +19,61 @@ namespace PROYECTO1
             string descricpion = Console.ReadLine();
             int id = mp.HabilidadesEspeciales.Count + 1;
             mp.AgregarHabilidadEspecial(new HabilidadEspecial(id, nombre, descricpion));
-            // se carga la nueva habilidad especial a todos los personajes creados hasta el momento 
-            foreach (Personaje p in mp.Personajes)
-            {
-                p.LaClase.habilidadesEspeciales.Add(new HabilidadEspecial(id, nombre, descricpion)); 
-            }
+
         }
 
 
         public void ModificarHabilidadEspecial()
         {
             Manejador mp = Manejador.getInstancia();
+            int pos; 
             Console.WriteLine(" Ingrese el nombre: ");
-            string nombre = Console.ReadLine(); 
+            string nombre = Console.ReadLine();
             if (mp.NomEstaHE(nombre))
             {
-                // mostrar ver que se desea modificar y realizar set 
+                Console.WriteLine("Parametro que desea modificar:  ");
+                Console.WriteLine("1- Id ");
+                Console.WriteLine("2- Nombre ");
+                Console.WriteLine("3- Descripcion ");
+                Console.WriteLine("4- A que clase pertenece ");
+                int opcion = int.Parse(Console.ReadLine());
+                switch (opcion)
+                {
+                    case 1:
+                        Console.WriteLine("Valor? ");
+                        int id = int.Parse(Console.ReadLine());
+                        pos = mp.posicionHE(nombre);
+                        mp.HabilidadesEspeciales[pos].Id = id; 
+
+                        break;
+                    case 2:
+                        Console.WriteLine("Valor? ");
+                        string n = Console.ReadLine();
+                        while (mp.NomEstaHE(n))
+                        {
+                            Console.WriteLine("Ya existe una Habilidad especial con ese nombre "); 
+                            Console.WriteLine("Ingrese nuevo nombre ");
+                            n = Console.ReadLine(); 
+                        }
+                        pos = mp.posicionHE(nombre);
+                        mp.HabilidadesEspeciales[pos].Nombre = n;
+                        Console.WriteLine("Modificación realizada con exito!! "); 
+
+                        break;
+                    case 3: break;
+                    case 4: break;
+                }
             }
+            else
+            {
+                Console.WriteLine("No hay ninguna habilidad especial con ese nombre!!! "); 
+            }
+
         }
+    
+        
+
+        //terminada :) 
         public void ListarHabilidadesEspeciales()
         {
             Manejador mp = Manejador.getInstancia();

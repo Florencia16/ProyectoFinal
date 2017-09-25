@@ -75,5 +75,23 @@ namespace PROYECTO1
             }
         }
 
+        public int posicionHE ( String nombre)
+        {
+            int pos=0;
+            foreach(HabilidadEspecial h in HabilidadesEspeciales)
+            {
+                if ( h.Nombre != nombre)
+                {
+                    pos++;
+                }
+                else
+                {
+                    return pos; 
+                }
+
+            }
+            return pos;    
+        }
+
     }
 }
