@@ -43,7 +43,7 @@ namespace PROYECTO1
                 {
                     
                     case 1:
-                        Console.WriteLine("Valor? ");
+                        Console.WriteLine("Nombre? ");
                         string n = Console.ReadLine();
                         while (mp.NomEstaHE(n))
                         {
@@ -152,6 +152,20 @@ namespace PROYECTO1
         public void ModificarClase()
         {
             Manejador mp = Manejador.getInstancia();
+			int pos;
+			Console.WriteLine("ingrese nombre");
+			string nombre = Console.ReadLine();
+			if (mp.NomEstaClase(nombre));
+
+			Console.WriteLine("parametro que desea modificar");
+			Console.WriteLine("1- Nombre");
+			Console.WriteLine("2-Descripcion");
+			int opcion = int.Parse(Console.ReadLine());
+
+
+
+
+
 
 
 
