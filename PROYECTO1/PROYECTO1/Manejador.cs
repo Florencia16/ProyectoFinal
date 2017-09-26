@@ -89,11 +89,11 @@ namespace PROYECTO1
 
             }
         }
-        public void AgregarRaza(Raza h)
+        public void AgregarRaza(Raza r)
         {
-            if (!(Razas.Exists(x => x.Nombre == h.Nombre)))
+            if (!(Razas.Exists(x => x.Nombre == r.Nombre)))
             {
-                this.Razas.Add(h);
+                this.Razas.Add(r);
             }
             else
             {
@@ -101,6 +101,32 @@ namespace PROYECTO1
 
             }
         }
+
+        public bool NomEstaR(string nombre)
+        {
+            return (Razas.Exists(x => x.Nombre == nombre));
+        }
+
+        public int posicionR(String nombre)
+        {
+            int pos = 0;
+            foreach (Raza r in Razas)
+            {
+                if (r.Nombre != nombre)
+                {
+                    pos++;
+                }
+                else
+                {
+                    return pos;
+                }
+
+            }
+            return pos;
+        }
+
+
+
         public void AgregarCaracteristicaVariable(CaracteristicaVariable h)
         {
             if (!(caracteristicasVariables.Exists(x => x.Nombre == h.Nombre)))

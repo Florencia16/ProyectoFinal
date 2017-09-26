@@ -12,5 +12,8 @@ namespace PROYECTO1
         public string Nombre { get; set; }
         public Personaje_Caracteristica valor { get; set; }
         
+        public CaracteristicaVariable (string n, Personaje_Caracteristica v ){
+            this.Nombre = n;
+            this.valor = v; 
     }
 }

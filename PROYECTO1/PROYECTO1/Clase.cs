@@ -12,5 +12,10 @@ namespace PROYECTO1
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public List<HabilidadEspecial> habilidadesEspeciales { get; set; }
+
+        public Clase (string nombre , string descripcion){
+            this.Nombre = nombre;
+            this.Descripcion = descripcion;
+        }
 	}
 }

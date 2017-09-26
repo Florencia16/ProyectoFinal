@@ -22,7 +22,7 @@ namespace PROYECTO1
 
         }
 
-
+        // solo me falta y la clase 
         public void ModificarHabilidadEspecial()
         {
             Manejador mp = Manejador.getInstancia();
@@ -32,21 +32,14 @@ namespace PROYECTO1
             if (mp.NomEstaHE(nombre))
             {
                 Console.WriteLine("Parametro que desea modificar:  ");
-                Console.WriteLine("1- Id ");
-                Console.WriteLine("2- Nombre ");
-                Console.WriteLine("3- Descripcion ");
-                Console.WriteLine("4- A que clase pertenece ");
+                Console.WriteLine("1- Nombre ");
+                Console.WriteLine("2- Descripcion ");
+                Console.WriteLine("3- A que clase pertenece ");
                 int opcion = int.Parse(Console.ReadLine());
                 switch (opcion)
                 {
+                    
                     case 1:
-                        Console.WriteLine("Valor? ");
-                        int id = int.Parse(Console.ReadLine());
-                        pos = mp.posicionHE(nombre);
-                        mp.HabilidadesEspeciales[pos].Id = id; 
-
-                        break;
-                    case 2:
                         Console.WriteLine("Valor? ");
                         string n = Console.ReadLine();
                         while (mp.NomEstaHE(n))
@@ -60,8 +53,15 @@ namespace PROYECTO1
                         Console.WriteLine("Modificación realizada con exito!! "); 
 
                         break;
+                    case 2:
+                        Console.WriteLine("Ingrese el nombre de la Habilidad Especial a modificar su descripción: ");
+                        string nom = Console.ReadLine();
+                        pos = mp.posicionHE(nom);
+                        Console.WriteLine("Ingrese una nueva descripción");
+                        mp.HabilidadesEspeciales[pos].Descripcion = Console.ReadLine();
+                        Console.WriteLine("Modificación realizada con exito!! ");
+                        break;
                     case 3: break;
-                    case 4: break;
                 }
             }
             else
@@ -99,7 +99,7 @@ namespace PROYECTO1
 
 
         }
-
+        //terminada :) 
         public void CrearClase()
         {
 			Manejador mp = Manejador.getInstancia();
@@ -107,12 +107,7 @@ namespace PROYECTO1
 			string nombre = Console.ReadLine();
 			Console.WriteLine("Ingrese una breve descripcion de esta Clase");
 			string descricpion = Console.ReadLine();
-			mp.AgregarClase(new Clase{
-				Nombre = nombre,
-				Descripcion = descricpion
-			});
-
-
+			mp.AgregarClase(new Clase( nombre, descricpion));
         }
 
         public void ModificarClase()
@@ -122,6 +117,7 @@ namespace PROYECTO1
 
 
         }
+        //terminada :) 
         public void ListarClases()
         {
 			Manejador mp = Manejador.getInstancia();
@@ -140,6 +136,7 @@ namespace PROYECTO1
 
 
         }
+        //terminada :) 
         public void CrearRaza()
         {
 			Manejador mp = Manejador.getInstancia();
@@ -147,22 +144,55 @@ namespace PROYECTO1
 			string nombre = Console.ReadLine();
 			Console.WriteLine("Ingrese una breve descripcion de esta Raza");
 			string descricpion = Console.ReadLine();
-			mp.AgregarRaza(new Raza
-			{
-				Nombre = nombre,
-				Descripcion = descricpion
-			});
-
-
+            mp.AgregarRaza(new Raza(nombre, descricpion));
 
 		}
+        //terminada :) 
         public void ModificarRaza()
         {
             Manejador mp = Manejador.getInstancia();
+            int pos;
+            Console.WriteLine(" Ingrese el nombre: ");
+            string nombre = Console.ReadLine();
+            if (mp.NomEstaR(nombre))
+            {
+                Console.WriteLine("Parametro que desea modificar:  ");
+                Console.WriteLine("1- Nombre ");
+                Console.WriteLine("2- Descripcion ");
+                int opcion = int.Parse(Console.ReadLine());
+                switch (opcion)
+                {
+                  
+                    case '1':
+                        Console.WriteLine("Valor? ");
+                        string n = Console.ReadLine();
+                        while (mp.NomEstaR(n))
+                        {
+                            Console.WriteLine("Ya existe una Raza con ese nombre ");
+                            Console.WriteLine("Ingrese nuevo nombre ");
+                            n = Console.ReadLine();
+                        }
+                        pos = mp.posicionR(nombre);
+                        mp.Razas[pos].Nombre = n;
+                        Console.WriteLine("Modificación realizada con exito!! ");
+                        break;
+                    case '2' :
+                        Console.WriteLine("Ingrese el nombre de la raza a modificar su descripción: ");
+                        string nom = Console.ReadLine();
+                        pos = mp.posicionR(nom);
+                        Console.WriteLine("Ingrese una nueva descripción");
+                        mp.Razas[pos].Descripcion = Console.ReadLine();
+                        Console.WriteLine("Modificación realizada con exito!! ");
+                        break;
 
+                    default:    Console.WriteLine("La opción ingresada no es correcta"); 
+                                break; 
 
+                }
+            }
 
         }
+        //terminada :)
         public void ListarRazas()
         {
 			Manejador mp = Manejador.getInstancia();
@@ -181,21 +211,21 @@ namespace PROYECTO1
 
 
         }
+        //terminada :)
         public void CrearCaracteristica()
         {
 
 			Manejador mp = Manejador.getInstancia();
 			Console.WriteLine("Ingrese el nombre de la Caracteristica Variable");
 			string nombre = Console.ReadLine();
-			mp.AgregarCaracteristicaVariable(new CaracteristicaVariable
-			{
-				Nombre = nombre
-
-			});
-
-
-
+            Console.WriteLine(" Valor?");
+            Personaje_Caracteristica v = new Personaje_Caracteristica();
+            v.valor = int.Parse(Console.ReadLine());
+            mp.AgregarCaracteristicaVariable(new CaracteristicaVariable(nombre, v));
+				
 		}
+
+
         public void ModificarCarateristica()
         {
             Manejador mp = Manejador.getInstancia();
@@ -203,6 +233,7 @@ namespace PROYECTO1
 
 
         }
+        //terminada :) 
         public void ListarCaracteristicas()
         {
 			Manejador mp = Manejador.getInstancia();
