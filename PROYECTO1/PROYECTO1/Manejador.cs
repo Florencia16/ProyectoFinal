@@ -157,6 +157,23 @@ namespace PROYECTO1
             }
             return pos;
         }
+        public int posicionC(String nombre)
+        {
+            int pos = 0;
+            foreach (Clase c in Clases)
+            {
+                if (c.Nombre != nombre)
+                {
+                    pos++;
+                }
+                else
+                {
+                    return pos;
+                }
+
+            }
+            return pos;
+        }
     }
 }
 

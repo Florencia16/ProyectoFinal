@@ -15,39 +15,34 @@ namespace PROYECTO1
             Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("---------------------------BIENVENIDO-----------------------------------------");
             Console.WriteLine("------------------------------------------------------------------------------");
-            Console.WriteLine("1- PERSONAJE ");
-            Console.WriteLine("2- CARACTERISTIVA VARIABLE ");
-            Console.WriteLine("2- RAZA");
-            Console.WriteLine("3- CLASE ");
-            Console.WriteLine("4- HABILIDAD ESPECIAL");
+            Console.WriteLine("1- HABILIDAD ESPECIAL CREAR  ");
+            Console.WriteLine("2- HABILIDAD ESPECIAL MODIFICAR  ");
+            Console.WriteLine("2- HABILIDAD ESPECIAL LISTAR HABILIDADES ESPECIALES ");
+            Console.WriteLine("3- ELIMINAR  ");
             
             Console.WriteLine("Ingrese la opción deseada:  ");
             int opcion = int.Parse(Console.ReadLine());
             switch (opcion)
             {
-                case '1':   
-                            break;
+                case '1':
+                    controlador.CrearHabilidadEspecial();
+
+                    break;
                 case '2':
-                            break;
+                    controlador.ModificarHabilidadEspecial();
+                    break;
                 case '3':
-                            break;
+                    controlador.ListarHabilidadesEspeciales();
+
+                    break;
                 case '4':
-                            break;
-                default:Console.WriteLine("La opcion ingresada no es correcta - intenta nuevamente!!!"); 
-                    break; 
-
+                    Console.WriteLine("Tranqui GERARDO aún no tenemos la funcionalidad Eliminar jeje");
+                    break;
+                default:
+                    Console.WriteLine("La opcion ingresada no es correcta - intenta nuevamente!!!");
+                    break;
             }
-			//            controlador.CrearHabilidadEspecial();
-			//          controlador.CrearHabilidadEspecial();
-			//        controlador.ListarHabilidadesEspeciales();
-			controlador.CrearClase();
-			Console.ReadKey();
-            controlador.CrearHabilidadEspecial();
-         
-            controlador.ListarHabilidadesEspeciales();
             Console.ReadKey();
-
-
         }
     }
 }
