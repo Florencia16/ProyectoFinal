@@ -12,6 +12,9 @@ namespace PROYECTO1
         //terminada :) 
         public void CrearHabilidadEspecial()
         {
+            Console.WriteLine("------------------------------------------------------------------------------");
+            Console.WriteLine("----------------------------Alta Habilidad Especial --------------------------");
+            Console.WriteLine("------------------------------------------------------------------------------");
             Manejador mp = Manejador.getInstancia();
             Console.WriteLine("Ingrese el nombre de la Habilidad Especial");
             string nombre = Console.ReadLine();
@@ -61,7 +64,21 @@ namespace PROYECTO1
                         mp.HabilidadesEspeciales[pos].Descripcion = Console.ReadLine();
                         Console.WriteLine("Modificación realizada con exito!! ");
                         break;
-                    case 3: break;
+                    case 3:
+                        if (mp.Clases == null)
+                        {
+                            Console.WriteLine("Aún no se han ingresado ninguna Clase"); 
+                        }
+                        else
+                        {   
+                            ListarClases();
+                            Console.WriteLine("Ingrese valor Id de clase  para cambiar ");
+                            int id = int.Parse(Console.ReadLine());
+                            pos = mp.posicionHE(nombre);
+                            mp.Clases[id - 1].habilidadesEspeciales.Add(mp.HabilidadesEspeciales[pos]); 
+                            //Eliminar habilidad especial en clase de Habilidades Especiales 
+                        }
+                        break;
                 }
             }
             else
@@ -84,10 +101,19 @@ namespace PROYECTO1
 
         }
 
-
+        //terminada :) 
         public void ListarHabilidadEspecialPorClase()
         {
             Manejador mp = Manejador.getInstancia();
+            foreach( Clase c in mp.Clases)
+            {
+                Console.WriteLine("Clase Id- {0} Nombre - {1} ", c.Id, c.Nombre);
+                Console.WriteLine("Posee las siguientes Habilidades Especiales");
+                foreach (HabilidadEspecial h in c.habilidadesEspeciales)
+                {
+                    Console.WriteLine("Habilidad Especial Id - {0} Nombre - {1} Descripcion - {2}" , h.Id, h.Nombre, h.Descripcion);
+                }
+            }
             
 
 
