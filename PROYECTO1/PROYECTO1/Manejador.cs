@@ -88,8 +88,12 @@ namespace PROYECTO1
                 throw new Exception("Ya existe una clase con ese nombre");
 
             }
+			
         }
-        public void AgregarRaza(Raza r)
+
+	
+
+		public void AgregarRaza(Raza r)
         {
             if (!(Razas.Exists(x => x.Nombre == r.Nombre)))
             {
@@ -157,7 +161,14 @@ namespace PROYECTO1
             }
             return pos;
         }
-    }
+
+
+
+		public bool NomEstaClase(string nombre)
+		{
+			return (Clases.Exists(x => x.Nombre == nombre));
+		}
+	}
 }
 
     
