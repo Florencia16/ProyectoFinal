@@ -15,7 +15,9 @@ namespace PROYECTO1
         public Raza (string n, string d)
         {
             this.Nombre = n;
-            this.Descripcion = d; 
-        }
-    }
+            this.Descripcion = d;
+			this.Id = Manejador.getInstancia().Razas.Count + 1;
+
+		}
+	}
 }

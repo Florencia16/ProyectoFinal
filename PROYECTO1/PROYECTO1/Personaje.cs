@@ -33,8 +33,9 @@ namespace PROYECTO1
             this.Inteligencia = inteligencia;
             this.Sabiduria = sabiduria;
             this.Carisma = carisma;
-		
-        }
+			this.Id = Manejador.getInstancia().Personajes.Count + 1;
+
+		}
 
     }
 }

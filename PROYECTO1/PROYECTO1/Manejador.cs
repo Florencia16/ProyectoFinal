@@ -85,7 +85,7 @@ namespace PROYECTO1
             }
             else
             {
-                throw new Exception("Ya existe una clase con ese nombre");
+                Console.WriteLine("Ya existe una clase con ese nombre");
 
             }
 			
@@ -129,9 +129,26 @@ namespace PROYECTO1
             return pos;
         }
 
+		public int posicionClase(String nombre)
+		{
+			int pos = 0;
+			foreach (Clase c in Clases)
+			{
+				if (c.Nombre != nombre)
+				{
+					pos++;
+				}
+				else
+				{
+					return pos;
+				}
+
+			}
+			return pos;
+		}
 
 
-        public void AgregarCaracteristicaVariable(CaracteristicaVariable h)
+		public void AgregarCaracteristicaVariable(CaracteristicaVariable h)
         {
             if (!(caracteristicasVariables.Exists(x => x.Nombre == h.Nombre)))
             {

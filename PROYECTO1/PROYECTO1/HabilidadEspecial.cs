@@ -17,7 +17,8 @@ namespace PROYECTO1
             this.Id = id; 
             this.Nombre = nombre;
             this.Descripcion = descripcion;
-        }
+			this.Id = Manejador.getInstancia().HabilidadesEspeciales.Count + 1;
+		}
 
        
     }

@@ -16,6 +16,8 @@ namespace PROYECTO1
         public Clase (string nombre , string descripcion){
             this.Nombre = nombre;
             this.Descripcion = descripcion;
-        }
+			habilidadesEspeciales = new List<HabilidadEspecial>();
+			this.Id = Manejador.getInstancia().Clases.Count + 1;
+		}
 	}
 }

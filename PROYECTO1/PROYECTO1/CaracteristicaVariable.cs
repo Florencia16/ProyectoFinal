@@ -16,6 +16,7 @@ namespace PROYECTO1
         {
             this.Nombre = n;
             this.valor = v;
-        }
+			this.Id = Manejador.getInstancia().caracteristicasVariables.Count + 1;
+		}
     }
 }
