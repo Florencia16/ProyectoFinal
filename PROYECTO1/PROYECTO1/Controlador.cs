@@ -470,7 +470,43 @@ namespace PROYECTO1
             }
             int id = mp.Personajes.Count + 1;
 
-           mp.AgregarPersonaje(new Personaje (id, elnombre,niv,fue,des,con, inte, sab,car));         
+           mp.AgregarPersonaje(new Personaje (id, elnombre,niv,fue,des,con, inte, sab,car));
+            Console.WriteLine("Dese ingresar la Raza de este personaje? S/N");
+            string res = Console.ReadLine();
+            if (res.Equals("S"))
+            {
+                if (mp.Razas == null)
+                {
+                    Console.WriteLine("No se han ingresado ninguna raza al sistema, crea la raza para ser asignada a este personaje");
+                    CrearRaza();
+                    //cargar personaje de la lsita de personajes la raza quien tendra id 1 dado que no existia ninguna raza en el sistema
+
+                }
+                else
+                {
+                    ListarRazas();
+                    Console.WriteLine("Estas son las razas cargadas en el sistema, favor indica el id  para cargar una existente 0 para crear una nueva raza ");
+                    int r = int.Parse(Console.ReadLine());
+                    if (r != 0)
+                    {
+                        while (r > mp.Razas.Count)
+                        {
+                            Console.WriteLine("El número de id ingresado no es el correcto - favor ingrese nuevamente ");
+                            r = int.Parse(Console.ReadLine());
+                        }
+
+                        //cargar al personaje de la lista de personajes la raza ya cargada al sistma 
+                    }
+                    else
+                    {
+
+                        Console.WriteLine("No se han ingresado ninguna raza al sistema, crea la raza para ser asignada a este personaje");
+                        CrearRaza();
+                        //cargar personaje de la lsita de personajes la raza quien tendra id 1 dado que no existia ninguna raza en el sistema
+                    }
+
+                }
+            }
 
         }
 
@@ -484,9 +520,9 @@ namespace PROYECTO1
         public void ListarPersonajes()
         {
 			Manejador mp = Manejador.getInstancia();
-			foreach (Personaje HE in mp.Personajes)
+			foreach (Personaje p in mp.Personajes)
 			{
-				Console.WriteLine("Id - {0} Nombre - {1} ", HE.Id, HE.Nombre);
+				Console.WriteLine("Id - {0} Nombre - {1} ", p.Id, p.Nombre);
 			}
 
 
