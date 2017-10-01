@@ -9,7 +9,7 @@ namespace PROYECTO1
     public class Controlador : IDPersonaje
     {
 
-        //terminada :) 
+
         public void CrearHabilidadEspecial()
         {
             Console.WriteLine("------------------------------------------------------------------------------");
@@ -25,11 +25,11 @@ namespace PROYECTO1
 
         }
 
-        // solo me falta y la clase 
+
         public void ModificarHabilidadEspecial()
         {
             Manejador mp = Manejador.getInstancia();
-            int pos; 
+            int pos;
             Console.WriteLine(" Ingrese el nombre: ");
             string nombre = Console.ReadLine();
             if (mp.NomEstaHE(nombre))
@@ -37,23 +37,22 @@ namespace PROYECTO1
                 Console.WriteLine("Parametro que desea modificar:  ");
                 Console.WriteLine("1- Nombre ");
                 Console.WriteLine("2- Descripcion ");
-                Console.WriteLine("3- A que clase pertenece ");
                 int opcion = int.Parse(Console.ReadLine());
                 switch (opcion)
                 {
-                    
+
                     case 1:
                         Console.WriteLine("Nombre? ");
                         string n = Console.ReadLine();
                         while (mp.NomEstaHE(n))
                         {
-                            Console.WriteLine("Ya existe una Habilidad especial con ese nombre "); 
+                            Console.WriteLine("Ya existe una Habilidad especial con ese nombre ");
                             Console.WriteLine("Ingrese nuevo nombre ");
-                            n = Console.ReadLine(); 
+                            n = Console.ReadLine();
                         }
                         pos = mp.posicionHE(nombre);
                         mp.HabilidadesEspeciales[pos].Nombre = n;
-                        Console.WriteLine("Modificación realizada con exito!! "); 
+                        Console.WriteLine("Modificación realizada con exito!! ");
 
                         break;
                     case 2:
@@ -64,237 +63,226 @@ namespace PROYECTO1
                         mp.HabilidadesEspeciales[pos].Descripcion = Console.ReadLine();
                         Console.WriteLine("Modificación realizada con exito!! ");
                         break;
-                    case 3:
-                            Console.WriteLine("Esta Habilidad Especial pertence a: ");
-                            
-                            
-                            ListarClases();
-                            Console.WriteLine("Ingrese valor Id de la nueva clase a la pasa a pertenecer ");
-                            int id = int.Parse(Console.ReadLine());
-                            pos = mp.posicionHE(nombre);
-                            mp.Clases[id - 1].habilidadesEspeciales.Add(mp.HabilidadesEspeciales[pos]); 
-                            
-                            break;
                     default: Console.WriteLine("La opcion ingresada no es la correcta");
-                        break; 
+                        break;
                 }
             }
             else
             {
-                Console.WriteLine("No hay ninguna habilidad especial con ese nombre!!! "); 
+                Console.WriteLine("No hay ninguna habilidad especial con ese nombre!!! ");
             }
 
         }
-    
-        
 
-        //terminada :) 
+
         public void ListarHabilidadesEspeciales()
         {
             Manejador mp = Manejador.getInstancia();
             foreach (HabilidadEspecial HE in mp.HabilidadesEspeciales)
             {
-                Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", HE.Id, HE.Nombre, HE.Descripcion); 
+                Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", HE.Id, HE.Nombre, HE.Descripcion);
             }
 
         }
 
-        //terminada :) 
+
         public void ListarHabilidadEspecialPorClase()
         {
             Manejador mp = Manejador.getInstancia();
-            foreach( Clase c in mp.Clases)
+            foreach (Clase c in mp.Clases)
             {
                 Console.WriteLine("Clase Id- {0} Nombre - {1} ", c.Id, c.Nombre);
-                Console.WriteLine("Posee las siguientes Habilidades Especiales");
+                Console.WriteLine("Posee las siguientes Habilidades Especiales: ");
                 foreach (HabilidadEspecial h in c.habilidadesEspeciales)
                 {
-                    Console.WriteLine("Habilidad Especial Id - {0} Nombre - {1} Descripcion - {2}" , h.Id, h.Nombre, h.Descripcion);
+                    Console.WriteLine("Habilidad Especial Id - {0} Nombre - {1} Descripcion - {2}", h.Id, h.Nombre, h.Descripcion);
                 }
             }
         }
 
         public void EliminarHabilidadEspecial()
         {
-			Manejador mp = Manejador.getInstancia();
-			int pos;
-			Console.WriteLine("Ingrese el nombre de la Habilidad especial a eliminar");
-			string nombreHE = Console.ReadLine();
-			if (mp.NomEstaHE(nombreHE))
-			{
+            Manejador mp = Manejador.getInstancia();
+            Console.WriteLine("Ingrese el nombre de la Habilidad especial a eliminar");
+            string nombreHE = Console.ReadLine();
+            if (mp.NomEstaHE(nombreHE))
+            {
 
-				int posicionHE = mp.posicionHE (nombreHE);
-				HabilidadEspecial habilidadEspecial = mp.HabilidadesEspeciales[posicionHE];
-				mp.HabilidadesEspeciales.Remove(habilidadEspecial);
-				foreach (Clase clase in mp.Clases) {
-					clase.habilidadesEspeciales.Remove(habilidadEspecial);
-				}
-				Console.WriteLine("la Habilidad Especial ha sido eliminada con exito");
-			}
-			else
-			{
-				Console.WriteLine("no se encontro una Habilidad Esecial con el nombre ingresado");
-			}
+                int posicionHE = mp.posicionHE(nombreHE);
+                HabilidadEspecial habilidadEspecial = mp.HabilidadesEspeciales[posicionHE];
+                mp.HabilidadesEspeciales.Remove(habilidadEspecial);
+                foreach (Clase clase in mp.Clases) {
+                    clase.habilidadesEspeciales.Remove(habilidadEspecial);
+                }
+                Console.WriteLine("La Habilidad Especial ha sido eliminada con exito!!");
+            }
+            else
+            {
+                Console.WriteLine("No se encontro una Habilidad Especial con el nombre ingresado");
+            }
+        }
 
 
-
-		}
-        //terminada :) 
         public void CrearClase()
         {
-			Manejador mp = Manejador.getInstancia();
-			Console.WriteLine("Ingrese el nombre de la Clase");
-			string nombre = Console.ReadLine();
-			if (!mp.NomEstaClase(nombre))
-			{
-				Console.WriteLine("Ingrese una breve descripcion de esta Clase");
-				string descricpion = Console.ReadLine();
-				mp.AgregarClase(new Clase(nombre, descricpion));
-				Console.WriteLine("Desea agregar alguna Habilidad Especial a esta clase ? S/N");
-				string res = Console.ReadLine();
-				while (res == "S")
-				{
-					Console.WriteLine("Ingrese el nombre de la Habilidad Especial");
-					string n = Console.ReadLine();
-					Console.WriteLine("Ingrese una breve descripcion de esta Habilidad Especial");
-					string d = Console.ReadLine();
-					int id = mp.HabilidadesEspeciales.Count + 1;
-					mp.AgregarHabilidadEspecial(new HabilidadEspecial(id, n, d));
-					int pos = mp.posicionC(nombre);
-					mp.Clases[pos].habilidadesEspeciales.Add(new HabilidadEspecial(id, n, d));
-					Console.WriteLine("Desea agregar alguna otra Habilidad Especial a esta clase ? S/N");
-					res = Console.ReadLine();
-				}
+            Manejador mp = Manejador.getInstancia();
+            Console.WriteLine("Ingrese el nombre de la Clase");
+            string nombre = Console.ReadLine();
+            if (!mp.NomEstaClase(nombre))
+            {
+                Console.WriteLine("Ingrese una breve descripcion de esta Clase");
+                string descricpion = Console.ReadLine();
+                mp.AgregarClase(new Clase(nombre, descricpion));
+                Console.WriteLine("Desea agregar alguna Habilidad Especial a esta clase ? S/N");
+                string res = Console.ReadLine();
+                while (res == "S")
+                {
+                    Console.WriteLine("Ingrese el nombre de la Habilidad Especial");
+                    string n = Console.ReadLine();
+                    Console.WriteLine("Ingrese una breve descripcion de esta Habilidad Especial");
+                    string d = Console.ReadLine();
+                    int id = mp.HabilidadesEspeciales.Count + 1;
+                    mp.AgregarHabilidadEspecial(new HabilidadEspecial(id, n, d));
+                    int pos = mp.posicionC(nombre);
+                    mp.Clases[pos].habilidadesEspeciales.Add(new HabilidadEspecial(id, n, d));
+                    Console.WriteLine("Desea agregar alguna otra Habilidad Especial a esta clase ? S/N");
+                    res = Console.ReadLine();
+                }
 
-			}
-			else {
-				Console.WriteLine("Ya existe una clase con el nombre ingresado");
-			}
-		}
+            }
+            else {
+                Console.WriteLine("Ya existe una clase con el nombre ingresado.");
+            }
+        }
 
         public void ModificarClase()
         {
             Manejador mp = Manejador.getInstancia();
-			int pos;
-			Console.WriteLine("Ingrese el nombre de la clase a modificar");
-			string nombreClase = Console.ReadLine();
-			if (mp.NomEstaClase(nombreClase))
-			{
-				//obtenemos la clase a modificar
-				int posicionClase = mp.posicionClase(nombreClase);
-				Clase clase = mp.Clases[posicionClase];
-				Console.WriteLine("Ingrese el parametro que desea modificar");
-				Console.WriteLine("1-Nombre");
-				Console.WriteLine("2-Descripcion");
-				Console.WriteLine("3-Habilidades Especiales");
-				int opcion = int.Parse(Console.ReadLine());
+            int pos;
+            Console.WriteLine("Ingrese el nombre de la clase a modificar");
+            string nombreClase = Console.ReadLine();
+            if (mp.NomEstaClase(nombreClase))
+            {
+                //obtenemos la clase a modificar
+                int posicionClase = mp.posicionClase(nombreClase);
+                Clase clase = mp.Clases[posicionClase];
+                Console.WriteLine("Ingrese el parametro que desea modificar");
+                Console.WriteLine("1-Nombre");
+                Console.WriteLine("2-Descripcion");
+                Console.WriteLine("3-Habilidades Especiales");
+                int opcion = int.Parse(Console.ReadLine());
 
-				switch (opcion)
-				{
+                switch (opcion)
+                {
 
-					case 1:
-						Console.WriteLine("Ingrese el nuevo nombre ");
-						string n = Console.ReadLine();
-						while (mp.NomEstaClase(n))
-						{
-							Console.WriteLine("Ya existe una Clase con ese nombre ");
-							Console.WriteLine("Ingrese nuevo nombre ");
-							n = Console.ReadLine();
-						}
-						clase.Nombre = n;
-						Console.WriteLine("Modificación realizada con exito!! ");
-						break;
-					case 2:
-						Console.WriteLine("Ingrese una nueva descripción");
-						clase.Descripcion = Console.ReadLine();
-						Console.WriteLine("Modificación realizada con exito!! ");
-						break;
-					case 3:
-						//obtenemos el tipo de operacion a ejectuar
-						Console.WriteLine("Que desea hacer?");
-						Console.WriteLine("1 - Agregar Habilidad Especial");
-						Console.WriteLine("2 - Quitar Habilidad Especial");
-						string opcionIngresada = Console.ReadLine();
-						if (opcionIngresada == "1")
-						{
-							Console.WriteLine("Seleccione el nombre de la habilidad especial a agregar");
-							ListarHabilidadesEspeciales();
-							string nombreHablidadEspecial = Console.ReadLine();
-							int posicionHabilidadEspecial = mp.posicionHE(nombreHablidadEspecial);
-							HabilidadEspecial habilidadEspecial = mp.HabilidadesEspeciales[posicionHabilidadEspecial];
-							clase.habilidadesEspeciales.Add(habilidadEspecial);
-							Console.WriteLine("Modificación realizada con exito!! ");
-						}
-						else if (opcionIngresada == "2")
-						{
-							Console.WriteLine("Seleccione el nombre de la habilidad especial a quitar");
-							ListarHabilidadesEspeciales();
-							string nombreHablidadEspecial = Console.ReadLine();
-							int posicionHabilidadEspecial = mp.posicionHE(nombreHablidadEspecial);
-							HabilidadEspecial habilidadEspecial = mp.HabilidadesEspeciales[posicionHabilidadEspecial];
-							clase.habilidadesEspeciales.Remove(habilidadEspecial);
-							Console.WriteLine("Modificación realizada con exito!! ");
-						}
-						else
-						{
-							Console.WriteLine("Opcion incorrecta");
-						}
+                    case 1:
+                        Console.WriteLine("Ingrese el nuevo nombre ");
+                        string n = Console.ReadLine();
+                        while (mp.NomEstaClase(n))
+                        {
+                            Console.WriteLine("Ya existe una Clase con ese nombre ");
+                            Console.WriteLine("Ingrese nuevo nombre ");
+                            n = Console.ReadLine();
+                        }
+                        clase.Nombre = n;
+                        Console.WriteLine("Modificación realizada con exito!! ");
+                        break;
+                    case 2:
+                        Console.WriteLine("Ingrese una nueva descripción");
+                        clase.Descripcion = Console.ReadLine();
+                        Console.WriteLine("Modificación realizada con exito!! ");
+                        break;
+                    case 3:
+                        //obtenemos el tipo de operacion a ejectuar
+                        Console.WriteLine("Que desea hacer?");
+                        Console.WriteLine("1 - Agregar Habilidad Especial");
+                        Console.WriteLine("2 - Quitar Habilidad Especial");
+                        string opcionIngresada = Console.ReadLine();
+                        if (opcionIngresada == "1")
+                        {
+                            Console.WriteLine("Seleccione el nombre de la habilidad especial a agregar");
+                            ListarHabilidadesEspeciales();
+                            string nombreHablidadEspecial = Console.ReadLine();
+                            int posicionHabilidadEspecial = mp.posicionHE(nombreHablidadEspecial);
+                            HabilidadEspecial habilidadEspecial = mp.HabilidadesEspeciales[posicionHabilidadEspecial];
+                            clase.habilidadesEspeciales.Add(habilidadEspecial);
+                            Console.WriteLine("Modificación realizada con exito!! ");
+                        }
+                        else if (opcionIngresada == "2")
+                        {
+                            Console.WriteLine("Seleccione el nombre de la habilidad especial a quitar");
+                            ListarHabilidadesEspeciales();
+                            string nombreHablidadEspecial = Console.ReadLine();
+                            int posicionHabilidadEspecial = mp.posicionHE(nombreHablidadEspecial);
+                            HabilidadEspecial habilidadEspecial = mp.HabilidadesEspeciales[posicionHabilidadEspecial];
+                            clase.habilidadesEspeciales.Remove(habilidadEspecial);
+                            Console.WriteLine("Modificación realizada con exito!! ");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Opcion incorrecta");
+                        }
 
-						break;
-					default:
-						Console.WriteLine("La opción ingresada no es correcta");
-						break;
-				}
-			}
-			else {
-				Console.WriteLine("No se encontro una clase con el nombre ingresado");
-			}
+                        break;
+                    default:
+                        Console.WriteLine("La opción ingresada no es correcta");
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("No se encontro una clase con el nombre ingresado");
+            }
 
-		}
-        //terminada :) 
+        }
+
         public void ListarClases()
         {
-			Manejador mp = Manejador.getInstancia();
-			foreach (Clase HE in mp.Clases)
-			{
-				Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", HE.Id, HE.Nombre, HE.Descripcion);
-			}
+            Manejador mp = Manejador.getInstancia();
+            if (mp.Clases == null)
+            {
+                Console.WriteLine("La lista de clases no tiene elementos");
+            } else
+            {
+                foreach (Clase C in mp.Clases)
+                {
+                    Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", C.Id, C.Nombre, C.Descripcion);
+                }
+            }
+        }
 
-
-
-		}
         public void EliminarClase()
         {
-			Manejador mp = Manejador.getInstancia();
-			int pos;
-			Console.WriteLine("Ingrese el nombre de la clase a eliminar");
-			string nombreClase = Console.ReadLine();
-			if (mp.NomEstaClase(nombreClase))
-			{
+            Manejador mp = Manejador.getInstancia();
+            Console.WriteLine("Ingrese el nombre de la clase a eliminar");
+            string nombreClase = Console.ReadLine();
+            if (mp.NomEstaClase(nombreClase))
+            {
 
-				int posicionClase = mp.posicionClase(nombreClase);
-				Clase clase = mp.Clases[posicionClase];
-				mp.Clases.Remove(clase);
-				Console.WriteLine("la clase ha sido eliminada con exito");
-			}
-			else {
-				Console.WriteLine("no se encontro una clase con el nombre ingresado");
-			}
+                int posicionClase = mp.posicionClase(nombreClase);
+                Clase clase = mp.Clases[posicionClase];
+                mp.Clases.Remove(clase);
+                Console.WriteLine("la clase ha sido eliminada con exito");
+            }
+            else {
+                Console.WriteLine("no se encontro una clase con el nombre ingresado");
+            }
+        }
 
 
-			}
-			//terminada :) 
-			public void CrearRaza()
+
+        public void CrearRaza()
         {
-			Manejador mp = Manejador.getInstancia();
-			Console.WriteLine("Ingrese el nombre de la Raza");
-			string nombre = Console.ReadLine();
-			Console.WriteLine("Ingrese una breve descripcion de esta Raza");
-			string descricpion = Console.ReadLine();
+            Manejador mp = Manejador.getInstancia();
+            Console.WriteLine("Ingrese el nombre de la Raza");
+            string nombre = Console.ReadLine();
+            Console.WriteLine("Ingrese una breve descripcion de esta Raza");
+            string descricpion = Console.ReadLine();
             mp.AgregarRaza(new Raza(nombre, descricpion));
 
-		}
-        //terminada :) 
+        }
+
+
         public void ModificarRaza()
         {
             Manejador mp = Manejador.getInstancia();
@@ -309,7 +297,7 @@ namespace PROYECTO1
                 int opcion = int.Parse(Console.ReadLine());
                 switch (opcion)
                 {
-                  
+
                     case '1':
                         Console.WriteLine("Valor? ");
                         string n = Console.ReadLine();
@@ -323,7 +311,7 @@ namespace PROYECTO1
                         mp.Razas[pos].Nombre = n;
                         Console.WriteLine("Modificación realizada con exito!! ");
                         break;
-                    case '2' :
+                    case '2':
                         Console.WriteLine("Ingrese el nombre de la raza a modificar su descripción: ");
                         string nom = Console.ReadLine();
                         pos = mp.posicionR(nom);
@@ -332,25 +320,34 @@ namespace PROYECTO1
                         Console.WriteLine("Modificación realizada con exito!! ");
                         break;
 
-                    default:    Console.WriteLine("La opción ingresada no es correcta"); 
-                                break; 
+                    default: Console.WriteLine("La opción ingresada no es correcta");
+                        break;
 
                 }
             }
 
         }
-        //terminada :)
+
+
+
         public void ListarRazas()
         {
-			Manejador mp = Manejador.getInstancia();
-			foreach (Raza HE in mp.Razas)
-			{
-				Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", HE.Id, HE.Nombre, HE.Descripcion);
-			}
+            Manejador mp = Manejador.getInstancia();
+            if (mp.Razas == null)
+            {
+                Console.WriteLine("La lista de razas no tiene ingresado ningún objeto.");
+            }
+            else
+            {
+                foreach (Raza R in mp.Razas)
+                {
+                    Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", R.Id, R.Nombre, R.Descripcion);
+                }
 
+            }
+        }
 
-
-		}
+        //lo tenia thalia
         public void EliminarRaza()
         {
             Manejador mp = Manejador.getInstancia();
@@ -358,45 +355,51 @@ namespace PROYECTO1
 
 
         }
-        //terminada :)
+
+
         public void CrearCaracteristica()
         {
 
-			Manejador mp = Manejador.getInstancia();
-			Console.WriteLine("Ingrese el nombre de la Caracteristica Variable");
-			string nombre = Console.ReadLine();
+            Manejador mp = Manejador.getInstancia();
+            Console.WriteLine("Ingrese el nombre de la Caracteristica Variable");
+            string nombre = Console.ReadLine();
             Console.WriteLine(" Valor?");
             Personaje_Caracteristica v = new Personaje_Caracteristica();
             v.valor = int.Parse(Console.ReadLine());
             mp.AgregarCaracteristicaVariable(new CaracteristicaVariable(nombre, v));
-				
-		}
 
+        }
 
+        //LO TENIA THALIA 
         public void ModificarCarateristica()
         {
             Manejador mp = Manejador.getInstancia();
 
 
 
-        }
-        //terminada :) 
+        } 
+
+
+
+       
         public void ListarCaracteristicas()
         {
 			Manejador mp = Manejador.getInstancia();
             if (mp.caracteristicasVariables == null)
             {
                 Console.WriteLine("La lista de Caracteristicas Variables esta vacia ");
-            }else
+            }
+            else
             {
-                foreach (CaracteristicaVariable HE in mp.caracteristicasVariables)
+                foreach (CaracteristicaVariable CV in mp.caracteristicasVariables)
                 {
-                    Console.WriteLine("Id - {0} Nombre - {1}  ", HE.Id, HE.Nombre);
+                    Console.WriteLine("Id - {0} Nombre - {1}  ", CV.Id, CV.Nombre);
                 }
 
             }
         }
 
+        //LO TENIA THALIA 
         public void EliminarCaracteristica()
         {
             Manejador mp = Manejador.getInstancia();
@@ -404,6 +407,8 @@ namespace PROYECTO1
 
 
         }
+
+
         // IMMPORTANTE FUNCONALIDAD CREAR PERSONAJE
         //Falta ver tema de mayusculas y minusculas con la busqueda de nombre, ver id si se ingresa por consola o averiguar si se debe incrementar automaticamente y ver hacer try catch O TRY PARSE cuando son letras y tienen que ser numeros 
 
