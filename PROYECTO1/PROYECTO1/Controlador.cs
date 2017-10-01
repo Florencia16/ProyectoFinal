@@ -347,7 +347,7 @@ namespace PROYECTO1
             }
         }
 
-        //lo tenia thalia
+        //LO TENIA THALIA 
         public void EliminarRaza()
         {
             Manejador mp = Manejador.getInstancia();
@@ -377,14 +377,15 @@ namespace PROYECTO1
 
 
 
-        } 
+        }
+
 
 
 
        
         public void ListarCaracteristicas()
         {
-			Manejador mp = Manejador.getInstancia();
+            Manejador mp = Manejador.getInstancia();
             if (mp.caracteristicasVariables == null)
             {
                 Console.WriteLine("La lista de Caracteristicas Variables esta vacia ");
@@ -412,11 +413,10 @@ namespace PROYECTO1
         // IMMPORTANTE FUNCONALIDAD CREAR PERSONAJE
         //Falta ver tema de mayusculas y minusculas con la busqueda de nombre, ver id si se ingresa por consola o averiguar si se debe incrementar automaticamente y ver hacer try catch O TRY PARSE cuando son letras y tienen que ser numeros 
 
-
-        //Funcionalidad para crear Personaje en el Sistema, no deja cargar un nuevo personaje con un mismo nombre ya existente en el sistema.
         public void CrearPersonaje()
         {
             Manejador mp = Manejador.getInstancia();
+            int niv; 
             Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("----------------------------Alta Personaje------------------------------------");
             Console.WriteLine("------------------------------------------------------------------------------");
@@ -430,10 +430,13 @@ namespace PROYECTO1
 
             }
             Console.WriteLine("Ingrese Nivel");
-            int niv = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out niv))
+            {
+                Console.WriteLine("El valor del nivel ingresado no es el correcto");
+            }
             Console.WriteLine("Ingrese valor Fuerza");
             int fue = int.Parse(Console.ReadLine());
-            while ((fue < 1) || (fue > 10)){
+            while ((fue < 1) || (fue > 10)) {
                 Console.WriteLine("Valor ingresado para Caracteristica Fuerza no es valido, debe ser entre 1 y 10");
                 fue = int.Parse(Console.ReadLine());
 
@@ -480,7 +483,7 @@ namespace PROYECTO1
             }
             int id = mp.Personajes.Count + 1;
 
-           mp.AgregarPersonaje(new Personaje (id, elnombre,niv,fue,des,con, inte, sab,car));
+            mp.AgregarPersonaje(new Personaje(id, elnombre, niv, fue, des, con, inte, sab, car));
             Console.WriteLine("Dese ingresar la Raza de este personaje? S/N");
             string res = Console.ReadLine();
             if (res.Equals("S"))
@@ -520,38 +523,64 @@ namespace PROYECTO1
 
         }
 
-       
-        public void ModificarPersonaje(){
+
+        public void ModificarPersonaje() {
             Manejador mp = Manejador.getInstancia();
-            
+
 
 
         }
         public void ListarPersonajes()
         {
-			Manejador mp = Manejador.getInstancia();
-			foreach (Personaje p in mp.Personajes)
-			{
-				Console.WriteLine("Id - {0} Nombre - {1} ", p.Id, p.Nombre);
-			}
+            Manejador mp = Manejador.getInstancia();
+            if (mp.Personajes == null)
+            {
+                Console.WriteLine("No hay personajes ingresados en el sistema ");
+            }
+            else
+            {
+                foreach (Personaje p in mp.Personajes)
+                {
+                    Console.WriteLine("Id - {0} Nombre - {1} ", p.Id, p.Nombre);
+                }
+            }
+        } 
 
-
-
-		}
         public void ListarPersonajeClase()
         {
             Manejador mp = Manejador.getInstancia();
-
+            foreach (Clase c in mp.Clases)
+            {
+                Console.WriteLine("Clase Id- {0} Nombre- {1} Descripcion {2}", c.Id, c.Nombre, c.Descripcion);
+                Console.WriteLine("Lista de perosnajes que pertenecen a esta clase -------- "); 
+                foreach (Personaje p in c.pertenecen)
+                {
+                    Console.WriteLine("Personaje Id- {0} Nombre- {1} Nivel- {2}", p.Id, p.Nombre, p.Nivel); 
+                }
+            }
 
 
         }
+
+
         public void ListarPersonajeRaza()
         {
             Manejador mp = Manejador.getInstancia();
-
+            foreach (Raza R in mp.Razas)
+            {
+                Console.WriteLine("Raza Id- {0} Nombre- {1} Descripcion {2}", R.Id, R.Nombre, R.Descripcion);
+                Console.WriteLine("Lista de personajes que tienen esta raza  -------- ");
+                foreach (Personaje p in R.pertenece)
+                {
+                    Console.WriteLine("Personaje Id- {0} Nombre- {1} Nivel- {2}", p.Id, p.Nombre, p.Nivel);
+                }
+            }
 
 
         }
+
+
+
         public void EliminarPersonaje()
         {
             Manejador mp = Manejador.getInstancia();
