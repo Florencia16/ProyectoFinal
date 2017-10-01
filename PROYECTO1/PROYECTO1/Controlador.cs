@@ -382,7 +382,6 @@ namespace PROYECTO1
 
 
 
-       
         public void ListarCaracteristicas()
         {
             Manejador mp = Manejador.getInstancia();
