@@ -384,14 +384,19 @@ namespace PROYECTO1
         public void ListarCaracteristicas()
         {
 			Manejador mp = Manejador.getInstancia();
-			foreach (CaracteristicaVariable HE in mp.caracteristicasVariables)
-			{
-				Console.WriteLine("Id - {0} Nombre - {1}  ", HE.Id, HE.Nombre);
-			}
+            if (mp.caracteristicasVariables == null)
+            {
+                Console.WriteLine("La lista de Caracteristicas Variables esta vacia ");
+            }else
+            {
+                foreach (CaracteristicaVariable HE in mp.caracteristicasVariables)
+                {
+                    Console.WriteLine("Id - {0} Nombre - {1}  ", HE.Id, HE.Nombre);
+                }
 
+            }
+        }
 
-
-		}
         public void EliminarCaracteristica()
         {
             Manejador mp = Manejador.getInstancia();
