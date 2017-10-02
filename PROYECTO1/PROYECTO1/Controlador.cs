@@ -415,7 +415,7 @@ namespace PROYECTO1
         public void CrearPersonaje()
         {
             Manejador mp = Manejador.getInstancia();
-            int niv; 
+            int niv, fue, des, con, sab, inte, car; 
             Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("----------------------------Alta Personaje------------------------------------");
             Console.WriteLine("------------------------------------------------------------------------------");
@@ -434,14 +434,20 @@ namespace PROYECTO1
                 Console.WriteLine("El valor del nivel ingresado no es el correcto");
             }
             Console.WriteLine("Ingrese valor Fuerza");
-            int fue = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out fue))
+            {
+                Console.WriteLine("Lo ingresado no es correcto, lo ingresasado deberá ser un número entre 1 y 10");
+            }
             while ((fue < 1) || (fue > 10)) {
                 Console.WriteLine("Valor ingresado para Caracteristica Fuerza no es valido, debe ser entre 1 y 10");
                 fue = int.Parse(Console.ReadLine());
 
             }
             Console.WriteLine("Ingrese valor Destreza");
-            int des = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out des))
+            {
+                Console.WriteLine("Lo ingresado no es correcto, lo ingresasado deberá ser un número entre 1 y 10");
+            }
             while ((des < 1) || (des > 10))
             {
                 Console.WriteLine("Valor ingresado para Caracteristica Destreaza no es valido, debe ser entre 1 y 10");
@@ -449,7 +455,10 @@ namespace PROYECTO1
 
             }
             Console.WriteLine("Ingrese valor Constitucion");
-            int con = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out con))
+            {
+                Console.WriteLine("Lo ingresado no es correcto, lo ingresasado deberá ser un número entre 1 y 10");
+            }
             while ((con < 1) || (con > 10))
             {
                 Console.WriteLine("Valor ingresado para Caracteristica Constitución no es valido, debe ser entre 1 y 10");
@@ -457,7 +466,10 @@ namespace PROYECTO1
 
             }
             Console.WriteLine("Ingrese valor Inteligencia");
-            int inte = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out inte))
+            {
+                Console.WriteLine("Lo ingresado no es correcto, lo ingresasado deberá ser un número entre 1 y 10");
+            }
             while ((inte < 1) || (inte > 10))
             {
                 Console.WriteLine("Valor ingresado para Caracteristica Inteligencia no es valido, debe ser entre 1 y 10");
@@ -465,7 +477,10 @@ namespace PROYECTO1
 
             }
             Console.WriteLine("Ingrese valor Sabiduria");
-            int sab = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out sab))
+            {
+                Console.WriteLine("Lo ingresado no es correcto, lo ingresasado deberá ser un número entre 1 y 10");
+            }
             while ((sab < 1) || (sab > 10))
             {
                 Console.WriteLine("Valor ingresado para Caracteristica Sabiduria no es valido, debe ser entre 1 y 10");
@@ -473,14 +488,17 @@ namespace PROYECTO1
 
             }
             Console.WriteLine("Ingrese valor Carisma");
-            int car = int.Parse(Console.ReadLine());
+            while (!int.TryParse(Console.ReadLine(), out car))
+            {
+                Console.WriteLine("Lo ingresado no es correcto, lo ingresasado deberá ser un número entre 1 y 10");
+            }
             while ((car < 1) || (car > 10))
             {
                 Console.WriteLine("Valor ingresado para Caracteristica Carisma no es valido, debe ser entre 1 y 10");
                 car = int.Parse(Console.ReadLine());
 
             }
-            int id = mp.Personajes.Count + 1;
+            int id = Manejador.getInstancia().Personajes.Count + 1;
 
             mp.AgregarPersonaje(new Personaje(id, elnombre, niv, fue, des, con, inte, sab, car));
             Console.WriteLine("Dese ingresar la Raza de este personaje? S/N");
@@ -491,6 +509,8 @@ namespace PROYECTO1
                 {
                     Console.WriteLine("No se han ingresado ninguna raza al sistema, crea la raza para ser asignada a este personaje");
                     CrearRaza();
+                   
+                    
                     //cargar personaje de la lsita de personajes la raza quien tendra id 1 dado que no existia ninguna raza en el sistema
 
                 }
