@@ -202,6 +202,9 @@ namespace PROYECTO1
 		{
 			return (Clases.Exists(x => x.Nombre == nombre));
 		}
+
+
+
 	}
 }
 

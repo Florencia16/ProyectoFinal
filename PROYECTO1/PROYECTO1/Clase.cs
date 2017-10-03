@@ -21,5 +21,10 @@ namespace PROYECTO1
 			this.Id = Manejador.getInstancia().Clases.Count + 1;
             this.pertenecen = new List<Personaje>();
 		}
+        public Clase()
+        {
+            
+
+        }
 	}
 }
