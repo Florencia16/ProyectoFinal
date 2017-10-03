@@ -56,9 +56,8 @@ namespace PROYECTO1
 
                         break;
                     case 2:
-                        Console.WriteLine("Ingrese el nombre de la Habilidad Especial a modificar su descripción: ");
-                        string nom = Console.ReadLine();
-                        pos = mp.posicionHE(nom);
+
+                        pos = mp.posicionHE(nombre);
                         Console.WriteLine("Ingrese una nueva descripción");
                         mp.HabilidadesEspeciales[pos].Descripcion = Console.ReadLine();
                         Console.WriteLine("Modificación realizada con exito!! ");
@@ -212,10 +211,25 @@ namespace PROYECTO1
                             Console.WriteLine("Seleccione el nombre de la habilidad especial a quitar");
                             ListarHabilidadesEspeciales();
                             string nombreHablidadEspecial = Console.ReadLine();
-                            int posicionHabilidadEspecial = mp.posicionHE(nombreHablidadEspecial);
-                            HabilidadEspecial habilidadEspecial = mp.HabilidadesEspeciales[posicionHabilidadEspecial];
-                            clase.habilidadesEspeciales.Remove(habilidadEspecial);
-                            Console.WriteLine("Modificación realizada con exito!! ");
+
+							if (mp.NomEstaHE(nombreHablidadEspecial))
+							{
+								int posicionHabilidadEspecial = mp.posicionHE(nombreHablidadEspecial);
+								HabilidadEspecial habilidadEspecial = mp.HabilidadesEspeciales[posicionHabilidadEspecial];
+								clase.habilidadesEspeciales.Remove(habilidadEspecial);
+								Console.WriteLine("Modificación realizada con exito!! ");
+
+
+							}
+							else
+							{
+								Console.WriteLine("No se encontro la habilidad especial ");
+
+
+							}
+
+
+							
                         }
                         else
                         {
@@ -349,11 +363,24 @@ namespace PROYECTO1
         //LO TENIA THALIA 
         public void EliminarRaza()
         {
-            Manejador mp = Manejador.getInstancia();
+			Manejador mp = Manejador.getInstancia();
+			Console.WriteLine("Ingrese el nombre de la Raza a eliminar");
+			string nombreRaza = Console.ReadLine();
+			if (mp.NomEstaR(nombreRaza))
+			{
+
+				int posicionR = mp.posicionClase(nombreRaza);
+				Raza raza= mp.Razas[posicionR];
+				mp.Razas.Remove(raza);
+				Console.WriteLine("la Raza ha sido eliminada con exito");
+			}
+			else
+			{
+				Console.WriteLine("no se encontro una Raza con el nombre ingresado");
+			}
 
 
-
-        }
+		}
 
 
         public void CrearCaracteristica()
@@ -369,14 +396,46 @@ namespace PROYECTO1
 
         }
 
-        //LO TENIA THALIA 
-        public void ModificarCarateristica()
-        {
-            Manejador mp = Manejador.getInstancia();
+		//LO TENIA THALIA 
+		public void ModificarCarateristica()
+		{
+			Manejador mp = Manejador.getInstancia();
+			Console.WriteLine("Ingrese el nombre de la Caracteristica a modificar");
+			string nombreCaracteristica = Console.ReadLine();
+			if (mp.NomEstaCV(nombreCaracteristica))
+			{
+
+				int posicionC = mp.posicionC(nombreCaracteristica);
+				Clase clase = mp.Clases[posicionC];
+				Console.WriteLine("Ingrese el parametro que desea modificar");
+				Console.WriteLine("1-Nombre");
+				int opcion = int.Parse(Console.ReadLine());
+
+				switch (opcion)
+				{
+
+					case 1:
+						Console.WriteLine("Ingrese el nuevo nombre ");
+						string n = Console.ReadLine();
+						while (mp.NomEstaCV(n))
+						{
+							Console.WriteLine("Ya existe una Caracteristica con ese nombre ");
+							Console.WriteLine("Ingrese nuevo nombre ");
+							n = Console.ReadLine();
+						}
+						clase.Nombre = n;
+						Console.WriteLine("Modificación realizada con exito!! ");
+
+						break;
+					default:
+						Console.WriteLine("La opción ingresada no es correcta");
+						break;
+				}
 
 
 
-        }
+			}
+		}
 
 
 
@@ -401,11 +460,25 @@ namespace PROYECTO1
         //LO TENIA THALIA 
         public void EliminarCaracteristica()
         {
-            Manejador mp = Manejador.getInstancia();
+			Manejador mp = Manejador.getInstancia();
+			Console.WriteLine("Ingrese el nombre de la Caracteristica a eliminar");
+			string nombreCaracteristica = Console.ReadLine();
+			if (mp.NomEstaCV(nombreCaracteristica))
+			{
+
+				int posicionCaracteristica = mp.posicionC(nombreCaracteristica);
+				CaracteristicaVariable caracteristicaVariable = mp.caracteristicasVariables[posicionCaracteristica];
+				mp.caracteristicasVariables.Remove(caracteristicaVariable);
+				Console.WriteLine("la Caracteristica ha sido eliminada con exito");
+			}
+			else
+			{
+				Console.WriteLine("no se encontro una Caracteristica con el nombre ingresado");
+			}
 
 
 
-        }
+		}
 
 
         // IMMPORTANTE FUNCONALIDAD CREAR PERSONAJE

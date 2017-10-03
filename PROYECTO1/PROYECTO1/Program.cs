@@ -27,12 +27,16 @@ namespace PROYECTO1
 				Console.WriteLine("6- CLASE MODIFICAR  ");
 				Console.WriteLine("7- CLASE LISTAR");
 				Console.WriteLine("8- CLASE ELIMINAR");
-                Console.WriteLine("8- CLASE ELIMINAR");
                 Console.WriteLine("9- CREAR PERSONAJE");
                 Console.WriteLine("10- LISTAR PERSONAJE POR CLASE ");
                 Console.WriteLine("11- LISTAR PERSONAJE POR RAZA");
                 Console.WriteLine("12- LISTAR PERSONAJES");
-                Console.WriteLine("Ingrese la opción deseada:  ");
+				Console.WriteLine("13- CREAR RAZA");
+				Console.WriteLine("14- LISTAR RAZA");
+				Console.WriteLine("15- MODIFICAR RAZA");
+				Console.WriteLine("16- ELIMINAR RAZA");
+
+				Console.WriteLine("Ingrese la opción deseada:  ");
 				opcion = int.Parse(Console.ReadLine());
 				switch (opcion)
 				{
@@ -79,11 +83,23 @@ namespace PROYECTO1
                     case 12:
                         controlador.ListarPersonajes();
                         break;
-                    default:
+					case 13:
+						controlador.CrearRaza();
+						break;
+					case 14:
+						controlador.ListarRazas();
+						break;
+					case 15:
+						controlador.ModificarRaza();
+						break;
+					case 16:
+						controlador.EliminarRaza();
+						break;
+					default:
 						Console.WriteLine("La opcion ingresada no es correcta - intenta nuevamente!!!");
 						break;
 				}
-				Console.WriteLine("Precione una tecla para continuar...");
+				Console.WriteLine("Presione una tecla para continuar...");
 				Console.ReadKey();
 			}
         }
