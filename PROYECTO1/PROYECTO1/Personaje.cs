@@ -36,6 +36,10 @@ namespace PROYECTO1
 			this.Id = Manejador.getInstancia().Personajes.Count + 1;
             this.LaRaza = new Raza();
 		}
+        public Personaje()
+        {
+
+        }
 
     }
 }
