@@ -101,7 +101,7 @@ namespace PROYECTO1
             }
             else
             {
-                throw new Exception("Ya existe una Raza con ese nombre");
+                Console.WriteLine("Ya existe una Raza con ese nombre");
 
             }
         }
@@ -111,7 +111,13 @@ namespace PROYECTO1
             return (Razas.Exists(x => x.Nombre == nombre));
         }
 
-        public int posicionR(String nombre)
+		public bool NomEstaCV(string nombre)
+		{
+			return (caracteristicasVariables.Exists(x => x.Nombre == nombre));
+		}
+
+
+		public int posicionR(String nombre)
         {
             int pos = 0;
             foreach (Raza r in Razas)
