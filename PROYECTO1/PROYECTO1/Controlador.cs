@@ -311,8 +311,8 @@ namespace PROYECTO1
                 switch (opcion)
                 {
 
-                    case '1':
-                        Console.WriteLine("Valor? ");
+                    case 1:
+                        Console.WriteLine("Ingrese nuevo nombre ");
                         string n = Console.ReadLine();
                         while (mp.NomEstaR(n))
                         {
@@ -324,10 +324,9 @@ namespace PROYECTO1
                         mp.Razas[pos].Nombre = n;
                         Console.WriteLine("Modificación realizada con exito!! ");
                         break;
-                    case '2':
-                        Console.WriteLine("Ingrese el nombre de la raza a modificar su descripción: ");
-                        string nom = Console.ReadLine();
-                        pos = mp.posicionR(nom);
+                    case 2:
+                       
+                        pos = mp.posicionR(nombre);
                         Console.WriteLine("Ingrese una nueva descripción");
                         mp.Razas[pos].Descripcion = Console.ReadLine();
                         Console.WriteLine("Modificación realizada con exito!! ");
