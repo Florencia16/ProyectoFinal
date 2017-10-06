@@ -10,7 +10,7 @@ namespace PROYECTO1
     {
 
 
-        public void CrearHabilidadEspecial()
+        public HabilidadEspecial CrearHabilidadEspecial()
         {
             Console.WriteLine("------------------------------------------------------------------------------");
             Console.WriteLine("----------------------------Alta Habilidad Especial --------------------------");
@@ -21,7 +21,7 @@ namespace PROYECTO1
             Console.WriteLine("Ingrese una breve descripcion de esta Habilidad Especial");
             string descricpion = Console.ReadLine();
             int id = mp.HabilidadesEspeciales.Count + 1;
-            mp.AgregarHabilidadEspecial(new HabilidadEspecial(id, nombre, descricpion));
+            return(new HabilidadEspecial(id, nombre, descricpion));
 
         }
 
@@ -122,7 +122,7 @@ namespace PROYECTO1
         }
 
 
-        public void CrearClase()
+        public Clase CrearClase()
         {
             Manejador mp = Manejador.getInstancia();
             Console.WriteLine("Ingrese el nombre de la Clase");
@@ -130,8 +130,7 @@ namespace PROYECTO1
             if (!mp.NomEstaClase(nombre))
             {
                 Console.WriteLine("Ingrese una breve descripcion de esta Clase");
-                string descricpion = Console.ReadLine();
-                mp.AgregarClase(new Clase(nombre, descricpion));
+                string descripcion = Console.ReadLine();
                 Console.WriteLine("Desea agregar alguna Habilidad Especial a esta clase ? S/N");
                 string res = Console.ReadLine();
                 while (res == "S")
@@ -146,12 +145,15 @@ namespace PROYECTO1
                     mp.Clases[pos].habilidadesEspeciales.Add(new HabilidadEspecial(id, n, d));
                     Console.WriteLine("Desea agregar alguna otra Habilidad Especial a esta clase ? S/N");
                     res = Console.ReadLine();
+                    return (new Clase(nombre, descripcion));
+                    //si no esta la clase no tedria que retornar nada
                 }
 
             }
             else {
                 Console.WriteLine("Ya existe una clase con el nombre ingresado.");
             }
+
         }
 
         public void ModificarClase()

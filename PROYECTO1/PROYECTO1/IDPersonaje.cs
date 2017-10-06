@@ -8,12 +8,12 @@ namespace PROYECTO1
 {
     public interface IDPersonaje
     {
-        void CrearHabilidadEspecial();
+        HabilidadEspecial CrearHabilidadEspecial();
         void ModificarHabilidadEspecial();
         void ListarHabilidadesEspeciales();
         void ListarHabilidadEspecialPorClase();
         void EliminarHabilidadEspecial();
-        void CrearClase();
+        Clase CrearClase();
         void ModificarClase();
         void ListarClases();
         void EliminarClase();
