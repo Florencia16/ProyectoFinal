@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace PROYECTO1
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Fabrica fabrica = new Fabrica();
-            IDPersonaje controlador = fabrica.GetControladorPersonaje();
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			Fabrica fabrica = new Fabrica();
+			IDPersonaje controlador = fabrica.GetControladorPersonaje();
 			int opcion = -1;
-			while (opcion != 0) {
+			while (opcion != 0)
+			{
 				Console.Clear();
 				Console.WriteLine("------------------------------------------------------------------------------");
 				Console.WriteLine("---------------------------BIENVENIDO-----------------------------------------");
@@ -27,17 +28,20 @@ namespace PROYECTO1
 				Console.WriteLine("6- CLASE MODIFICAR  ");
 				Console.WriteLine("7- CLASE LISTAR");
 				Console.WriteLine("8- CLASE ELIMINAR");
-                Console.WriteLine("9- CREAR PERSONAJE");
-                Console.WriteLine("10- LISTAR PERSONAJE POR CLASE ");
-                Console.WriteLine("11- LISTAR PERSONAJE POR RAZA");
-                Console.WriteLine("12- LISTAR PERSONAJES");
+				Console.WriteLine("9- CREAR PERSONAJE");
+				Console.WriteLine("10- LISTAR PERSONAJE POR CLASE ");
+				Console.WriteLine("11- LISTAR PERSONAJE POR RAZA");
+				Console.WriteLine("12- LISTAR PERSONAJES");
 				Console.WriteLine("13- CREAR RAZA");
 				Console.WriteLine("14- LISTAR RAZA");
 				Console.WriteLine("15- MODIFICAR RAZA");
 				Console.WriteLine("16- ELIMINAR RAZA");
 
 				Console.WriteLine("Ingrese la opción deseada:  ");
-				opcion = int.Parse(Console.ReadLine());
+				while (!int.TryParse(Console.ReadLine(), out opcion))
+				{
+					Console.WriteLine("El valor ingresado de Id no es correcto, intente nuevamente por favor ");
+				}
 				switch (opcion)
 				{
 					case 0:
@@ -71,18 +75,18 @@ namespace PROYECTO1
 					case 8:
 						controlador.EliminarClase();
 						break;
-                    case 9:
-                        controlador.CrearPersonaje();
-                        break;
-                    case 10:
-                        controlador.ListarPersonajeClase();
-                        break;
-                    case 11:
-                        controlador.ListarPersonajeRaza();
-                        break;
-                    case 12:
-                        controlador.ListarPersonajes();
-                        break;
+					case 9:
+						controlador.CrearPersonaje();
+						break;
+					case 10:
+						controlador.ListarPersonajeClase();
+						break;
+					case 11:
+						controlador.ListarPersonajeRaza();
+						break;
+					case 12:
+						controlador.ListarPersonajes();
+						break;
 					case 13:
 						controlador.CrearRaza();
 						break;
@@ -102,6 +106,6 @@ namespace PROYECTO1
 				Console.WriteLine("Presione una tecla para continuar...");
 				Console.ReadKey();
 			}
-        }
-    }
+		}
+	}
 }
