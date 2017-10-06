@@ -17,15 +17,15 @@ namespace PROYECTO1
         void ModificarClase();
         void ListarClases();
         void EliminarClase();
-        void CrearRaza();
+        Raza CrearRaza();
         void ModificarRaza();
         void ListarRazas();
         void EliminarRaza();
-        void CrearCaracteristica();
+        CaracteristicaVariable CrearCaracteristica();
         void ModificarCarateristica();
         void ListarCaracteristicas();
         void EliminarCaracteristica();
-        void CrearPersonaje();
+        Personaje CrearPersonaje();
         void ModificarPersonaje();
         void ListarPersonajes();
         void ListarPersonajeRaza();

@@ -21,9 +21,6 @@ namespace PROYECTO1
             this.pertenece = new List<Personaje>();
 
 		}
-        public Raza()
-        {
-
-        }
+       
 	}
 }
