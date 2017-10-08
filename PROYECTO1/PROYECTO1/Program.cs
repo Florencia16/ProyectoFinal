@@ -73,24 +73,26 @@ namespace PROYECTO1
 				Console.WriteLine("10- LISTAR POR CLASE ");
 				Console.WriteLine("11- LISTAR POR RAZA");
 				Console.WriteLine("12- LISTAR ");
+                Console.WriteLine("13- MODIFICAR ");
+                Console.WriteLine("14- ELIMINAR");
 				Console.ForegroundColor = ConsoleColor.Blue;
 				Console.WriteLine("OPCIONES RAZA");
 				Console.ForegroundColor = ConsoleColor.Magenta;
-				Console.WriteLine("13- CREAR ");
-				Console.WriteLine("14- LISTAR ");
-				Console.WriteLine("15- MODIFICAR ");
-				Console.WriteLine("16- ELIMINAR ");
+				Console.WriteLine("15- CREAR ");
+				Console.WriteLine("16- LISTAR ");
+				Console.WriteLine("17- MODIFICAR ");
+				Console.WriteLine("18- ELIMINAR ");
 				Console.ForegroundColor = ConsoleColor.Blue;
 				Console.WriteLine("OPCIONES NIVEL");
 				Console.ForegroundColor = ConsoleColor.Magenta;
-				Console.WriteLine("17- Subir ");
+				Console.WriteLine("19- Subir ");
 				Console.ForegroundColor = ConsoleColor.Blue;
 				Console.WriteLine("OPCIONES CARACTERISTICAS");
 				Console.ForegroundColor = ConsoleColor.Magenta;
-				Console.WriteLine("18- Crear");
-                Console.WriteLine("19- Modificar");
-                Console.WriteLine("20- Listar");
-				Console.WriteLine("21- Eliminar Caracteristica");
+				Console.WriteLine("20- Crear");
+                Console.WriteLine("21- Modificar");
+                Console.WriteLine("22- Listar");
+				Console.WriteLine("23- Eliminar Caracteristica");
                 
                 Console.ForegroundColor = ConsoleColor.Yellow;
 				Console.WriteLine("Ingrese la opción deseada:  ");
@@ -146,27 +148,31 @@ namespace PROYECTO1
 					case 12:
 						controlador.ListarPersonajes();
 						break;
-					case 13:
+                    case 13: controlador.ModificarPersonaje();
+                        break;
+                    case 14: controlador.EliminarPersonaje();
+                        break; 
+					case 15:
 						controlador.CrearRaza();
 						break;
-					case 14:
+					case 16:
 						controlador.ListarRazas();
 						break;
-					case 15:
+					case 17:
 						controlador.ModificarRaza();
 						break;
-					case 16:
+					case 18:
 						controlador.EliminarRaza();
 						break;
-                    case 17:  controlador.SubirNivel();
+                    case 19:  controlador.SubirNivel();
                         break;
-                    case 18: controlador.CrearCaracteristica();
+                    case 20: controlador.CrearCaracteristica();
                         break;
-                    case 19: controlador.ModificarCarateristica();
+                    case 21: controlador.ModificarCarateristica();
                         break;
-                    case 20: controlador.ListarCaracteristicas();
+                    case 22: controlador.ListarCaracteristicas();
                         break;
-                    case 21: controlador.EliminarCaracteristica();
+                    case 23: controlador.EliminarCaracteristica();
                         break; 
 					default:
 						Console.ForegroundColor = ConsoleColor.DarkGreen;
