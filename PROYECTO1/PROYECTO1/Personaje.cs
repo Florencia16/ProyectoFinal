@@ -77,27 +77,30 @@ namespace PROYECTO1
                 {
                     Console.WriteLine("No se han ingresado ninguna caracteristica variable a este personaje");
                 }
-                Console.WriteLine("Eliga una CV para aumentar al subir de nivel");
-                Console.WriteLine("Caracteristicas Variables existentes en este Personaje: ");
-                foreach (CaracteristicaVariable c in CaracteristicasVariables)
+                else
                 {
-                    if (!(c.valor.valor == 10))
+                    Console.WriteLine("Eliga una CV para aumentar al subir de nivel");
+                    Console.WriteLine("Caracteristicas Variables existentes en este Personaje: ");
+                    foreach (CaracteristicaVariable c in CaracteristicasVariables)
                     {
-                        c.ImprimirCV();
+                        if (!(c.valor.valor == 10))
+                        {
+                            c.ImprimirCV();
 
+                        }
                     }
-                }
-                Console.WriteLine("Id de CV a aumentar?");
-                int idCV = int.Parse(Console.ReadLine());
-                while ((idCV < 0) || (idCV > m.caracteristicasVariables.Count))
-                {
-                    Console.WriteLine("El valor ingresado no es el correcto");
-                    idCV = int.Parse(Console.ReadLine());
-                }
-                CaracteristicasVariables[idCV].valor.valor++;
-                  
-            }
+                    Console.WriteLine("Id de CV a aumentar?");
+                    int idCV = int.Parse(Console.ReadLine());
+                    while ((idCV < 0) || (idCV > m.caracteristicasVariables.Count))
+                    {
+                        Console.WriteLine("El valor ingresado no es el correcto");
+                        idCV = int.Parse(Console.ReadLine());
+                    }
+                    CaracteristicasVariables[idCV].valor.valor++;
 
+                }
+            }
+                
             this.Nivel++;
         }
     }

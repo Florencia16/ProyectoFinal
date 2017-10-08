@@ -115,17 +115,7 @@ namespace PROYECTO1
 		{
 			return (caracteristicasVariables.Exists(x => x.Nombre == nombre));
 		}
-        public int posicionCV (String nombre)
-        {
-            int pos = 0;
-            foreach (CaracteristicaVariable c in caracteristicasVariables)
-            {
-
-            }
-
-                return pos; 
-        }
-
+       
 
 		public int posicionR(String nombre)
         {
@@ -207,6 +197,16 @@ namespace PROYECTO1
 			}
 			return null;
 		}
+
+        public CaracteristicaVariable obtenerCaracteristivaV(String nombre)
+        {
+            foreach(CaracteristicaVariable cv in caracteristicasVariables)
+            {
+                if (cv.Nombre == nombre)
+                    return cv;
+            }
+            return null; 
+        }
 
 	}
 }

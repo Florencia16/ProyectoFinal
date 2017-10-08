@@ -149,9 +149,9 @@ namespace PROYECTO1
             Console.WriteLine("Ingrese una breve descripcion de esta Clase");
             string descripcion = Console.ReadLine();
             Console.WriteLine("Desea agregar alguna Habilidad Especial a esta clase ? S/N");
-            string res = Console.ReadLine();
+            string res = Console.ReadLine().ToLower();
             mp.AgregarClase(new Clase(nombre, descripcion));
-            while (res == "S")
+            while (res.Equals("s"))
             {
                 Console.WriteLine("Ingrese el nombre de la Habilidad Especial");
                 string n = Console.ReadLine();
@@ -162,7 +162,7 @@ namespace PROYECTO1
                 int pos = mp.posicionC(nombre);
                 mp.Clases[pos].habilidadesEspeciales.Add(new HabilidadEspecial(id, n, d));
                 Console.WriteLine("Desea agregar alguna otra Habilidad Especial a esta clase ? S/N");
-                res = Console.ReadLine();
+                res = Console.ReadLine().ToLower();
             }
 
             return (new Clase(nombre, descripcion));
@@ -674,15 +674,16 @@ namespace PROYECTO1
                 {
                     Console.WriteLine("Caracteristica Nombre - {0} ", cv.Nombre);
                     Console.WriteLine("Valor para este Personaje ");
-                    Personaje_Caracteristica v = new Personaje_Caracteristica();
-                    v.valor = int.Parse(Console.ReadLine());
-                    while((v.valor <1)|| (v.valor>10))
+                    valoraux.valor = int.Parse(Console.ReadLine());
+                    while((valoraux.valor <1)|| (valoraux.valor>10))
                     {
                         Console.WriteLine("Valor ingresado no válido para esta caracterisitca, debe ser entre el rando 1-10");
                         Console.WriteLine("Intente nuevamente");
-                        v.valor = int.Parse(Console.ReadLine());
+                        valoraux.valor = int.Parse(Console.ReadLine());
                     }
-                    mp.Personajes[id - 1].CaracteristicasVariables.Add(cv); 
+                    CaracteristicaVariable caracteristica = mp.obtenerCaracteristivaV(cv.Nombre);
+                    caracteristica.valor = valoraux;
+                    mp.obtenerPersonaje(elnombre).CaracteristicasVariables.Add(caracteristica); 
                 }
             }
             
@@ -692,11 +693,11 @@ namespace PROYECTO1
             if (entrada.Equals("s"))
             {
                 cvaux = CrearCaracteristica();
-                mp.Personajes[id - 1].CaracteristicasVariables.Add(cvaux);
+                mp.obtenerPersonaje(elnombre).CaracteristicasVariables.Add(cvaux);
                 
                 foreach ( Personaje paux in mp.Personajes)
                 {
-                    if (!(paux.Id == id))
+                    if (!(paux == mp.obtenerPersonaje(elnombre)))
                     {
                         cvaux.valor.valor = 1;
                         paux.CaracteristicasVariables.Add(cvaux);
