@@ -1107,7 +1107,7 @@ namespace PROYECTO1
 		{
 			Manejador mp = Manejador.getInstancia();
 			Personaje p = new Personaje();
-			int id;
+		
             if (mp.Personajes.Count == 0)
             {
                 Console.WriteLine("No se han ingresado ningún personaje al sistema, debe ingresar un personaje primero");
