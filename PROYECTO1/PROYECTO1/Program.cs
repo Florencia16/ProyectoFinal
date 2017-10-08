@@ -94,6 +94,7 @@ namespace PROYECTO1
 
 				Console.ForegroundColor = ConsoleColor.Yellow;
 				Console.WriteLine("Ingrese la opción deseada:  ");
+				Console.ForegroundColor = ConsoleColor.Cyan;
 				while (!int.TryParse(Console.ReadLine(), out opcion))
 				{
 					Console.ForegroundColor = ConsoleColor.DarkGreen;

@@ -41,14 +41,14 @@ namespace PROYECTO1
 
         }
 
-        public void AumentarNivel(Personaje elPersonaje)
+        public void AumentarNivel()
         {
             List<HabilidadEspecial> listAux = new List<HabilidadEspecial>();
             Manejador m = Manejador.getInstancia();
 
             foreach (HabilidadEspecial HE in m.HabilidadesEspeciales)
             {
-                foreach (HabilidadEspecial h in elPersonaje.LaClase.habilidadesEspeciales)
+                foreach (HabilidadEspecial h in this.LaClase.habilidadesEspeciales)
                 {
                     if (!HE.Nombre.Equals(h.Nombre))
                     {
@@ -71,9 +71,9 @@ namespace PROYECTO1
                 LaClase.habilidadesEspeciales.Add(m.HabilidadesEspeciales[idHE - 1]);
             }
 
-            if ((elPersonaje.Nivel % 2 != 0) && (elPersonaje.Nivel != 1))
+            if ((this.Nivel % 2 != 0) && (this.Nivel != 1))
             {
-                if (elPersonaje.CaracteristicasVariables.Count == 0)
+                if (this.CaracteristicasVariables.Count == 0)
                 {
                     Console.WriteLine("No se han ingresado ninguna caracteristica variable a este personaje");
                 }
@@ -98,7 +98,7 @@ namespace PROYECTO1
                   
             }
 
-            elPersonaje.Nivel++;
+            this.Nivel++;
         }
     }
 }

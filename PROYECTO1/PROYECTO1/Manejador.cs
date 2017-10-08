@@ -201,7 +201,12 @@ namespace PROYECTO1
 			return (Clases.Exists(x => x.Nombre == nombre));
 		}
 
-
+		public Personaje obtenerPersonaje(string nombre) {
+			foreach (Personaje personaje in Personajes) {
+				if (personaje.Nombre == nombre) return personaje;
+			}
+			return null;
+		}
 
 	}
 }

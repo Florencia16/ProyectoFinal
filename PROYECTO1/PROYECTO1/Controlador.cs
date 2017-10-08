@@ -1085,17 +1085,15 @@ namespace PROYECTO1
             else
             {
                 ListarPersonajes();
-                Console.WriteLine("Ingrese el Id del Personaje a subir de nivel ");
-                while (!int.TryParse(Console.ReadLine(), out id))
+                Console.WriteLine("Ingrese el Nombre del Personaje a subir de nivel ");
+				string nombrePersonaje = Console.ReadLine();
+                while (!mp.NomEstaP(nombrePersonaje))
                 {
-                    Console.WriteLine("El valor ingresado de Id no es correcto, intente nuevamente por favor ");
-                }
-                while ((id < 0) || (id > mp.Personajes.Count))
-                {
-                    Console.WriteLine("El valor ingresado Id no es el corrrecto, esta fuera de rango, intente nuevamente por favor");
-                }
-
-                p.AumentarNivel(p);
+                    Console.WriteLine("No se encontro el personaje ingresado, intente nuevamente por favor ");
+					nombrePersonaje = Console.ReadLine();
+				}
+				p = mp.obtenerPersonaje(nombrePersonaje);
+                p.AumentarNivel();
                 Console.WriteLine("El nivel ha sido aumentado con exito al Personaje {0}", p.Nombre); 
             }
 		}
