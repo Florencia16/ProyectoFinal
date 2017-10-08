@@ -205,7 +205,11 @@ namespace PROYECTO1
 			List<Personaje_Caracteristica> personajes_caracteristicas = new List<Personaje_Caracteristica>();
 			foreach (Personaje_Caracteristica personaje_caracteristica in Personaje_Caracteristicas)
 			{
-				if (personaje_caracteristica.personaje.Nombre == nombre) personajes_caracteristicas.Add(personaje_caracteristica);
+				if (personaje_caracteristica.personaje.Nombre == nombre)
+                {
+                    personajes_caracteristicas.Add(personaje_caracteristica);
+                }
+                    
 			}
 			return personajes_caracteristicas;
 		}
@@ -214,7 +218,10 @@ namespace PROYECTO1
 		{
 			foreach (Personaje_Caracteristica personaje_caracteristica in Personaje_Caracteristicas)
 			{
-				if (personaje_caracteristica.personaje.Nombre == nombrePersonaje && personaje_caracteristica.caracteristicaVariable.Nombre == nombreCaracteristica) return personaje_caracteristica;
+                if ((personaje_caracteristica.personaje.Nombre == nombrePersonaje) && (personaje_caracteristica.caracteristicaVariable.Nombre == nombreCaracteristica))
+                {
+                    return personaje_caracteristica;
+                }
 			}
 			return null;
 		}
