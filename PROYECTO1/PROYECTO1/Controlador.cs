@@ -178,7 +178,7 @@ namespace PROYECTO1
 			if (mp.NomEstaClase(nombreClase))
 			{
 				//obtenemos la clase a modificar
-				int posicionClase = mp.posicionClase(nombreClase);
+				int posicionClase = mp.posicionC(nombreClase);
 				Clase clase = mp.Clases[posicionClase];
 				Console.WriteLine("Ingrese el parametro que desea modificar");
 				Console.WriteLine("1-Nombre");
@@ -296,7 +296,7 @@ namespace PROYECTO1
 			if (mp.NomEstaClase(nombreClase))
 			{
 
-				int posicionClase = mp.posicionClase(nombreClase);
+				int posicionClase = mp.posicionC(nombreClase);
 				Clase clase = mp.Clases[posicionClase];
 				mp.Clases.Remove(clase);
 				Console.WriteLine("la clase ha sido eliminada con exito");
@@ -682,7 +682,7 @@ namespace PROYECTO1
                         Console.WriteLine("Intente nuevamente");
                         v.valor = int.Parse(Console.ReadLine());
                     }
-                    mp.Personajes[id - 1].; 
+                    mp.Personajes[id - 1].CaracteristicasVariables.Add(cv); 
                 }
             }
             
