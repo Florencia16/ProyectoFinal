@@ -682,7 +682,7 @@ namespace PROYECTO1
                         Console.WriteLine("Intente nuevamente");
                         v.valor = int.Parse(Console.ReadLine());
                     }
-                    mp.Personajes[id - 1].CaracteristicasVariables.Add(cv); 
+                    mp.Personajes[id - 1].; 
                 }
             }
             
@@ -693,11 +693,12 @@ namespace PROYECTO1
             {
                 cvaux = CrearCaracteristica();
                 mp.Personajes[id - 1].CaracteristicasVariables.Add(cvaux);
-                cvaux.valor.valor = 1; 
+                
                 foreach ( Personaje paux in mp.Personajes)
                 {
                     if (!(paux.Id == id))
                     {
+                        cvaux.valor.valor = 1;
                         paux.CaracteristicasVariables.Add(cvaux);
                     }
                     
@@ -1094,7 +1095,7 @@ namespace PROYECTO1
                     Console.WriteLine("El valor ingresado Id no es el corrrecto, esta fuera de rango, intente nuevamente por favor");
                 }
 
-                p.AumentarNivel();
+                p.AumentarNivel(p);
                 Console.WriteLine("El nivel ha sido aumentado con exito al Personaje {0}", p.Nombre); 
             }
 		}

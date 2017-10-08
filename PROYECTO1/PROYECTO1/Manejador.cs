@@ -42,7 +42,7 @@ namespace PROYECTO1
             }
             else
             {
-                throw new Exception("Ya existe un Personaje con ese nombre");
+                Console.WriteLine("Ya existe un Personaje con ese nombre");
             }
         }
 
@@ -115,6 +115,16 @@ namespace PROYECTO1
 		{
 			return (caracteristicasVariables.Exists(x => x.Nombre == nombre));
 		}
+        public int posicionCV (String nombre)
+        {
+            int pos = 0;
+            foreach (CaracteristicaVariable c in caracteristicasVariables)
+            {
+
+            }
+
+                return pos; 
+        }
 
 
 		public int posicionR(String nombre)
@@ -134,24 +144,6 @@ namespace PROYECTO1
             }
             return pos;
         }
-
-		public int posicionClase(String nombre)
-		{
-			int pos = 0;
-			foreach (Clase c in Clases)
-			{
-				if (c.Nombre != nombre)
-				{
-					pos++;
-				}
-				else
-				{
-					return pos;
-				}
-
-			}
-			return pos;
-		}
 
 
 		public void AgregarCaracteristicaVariable(CaracteristicaVariable h)

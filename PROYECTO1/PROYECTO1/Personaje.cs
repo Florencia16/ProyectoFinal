@@ -41,13 +41,14 @@ namespace PROYECTO1
 
         }
 
-        public void AumentarNivel()
+        public void AumentarNivel(Personaje elPersonaje)
         {
             List<HabilidadEspecial> listAux = new List<HabilidadEspecial>();
             Manejador m = Manejador.getInstancia();
+
             foreach (HabilidadEspecial HE in m.HabilidadesEspeciales)
             {
-                foreach (HabilidadEspecial h in LaClase.habilidadesEspeciales)
+                foreach (HabilidadEspecial h in elPersonaje.LaClase.habilidadesEspeciales)
                 {
                     if (!HE.Nombre.Equals(h.Nombre))
                     {
@@ -57,7 +58,7 @@ namespace PROYECTO1
             }
             if (listAux.Count == 0)
             {
-                Console.WriteLine("Este Personaje ya tiene cargadas todas las HE que posee ");
+                Console.WriteLine("Este Personaje ya tiene cargadas todas las HE que posee el Sistema");
             }
             else
             {
@@ -65,16 +66,14 @@ namespace PROYECTO1
                 {
                     Console.WriteLine(" Habilidad Especial Id-{0} Nombre-{1} Descripcion- {2}", h.Id, h.Nombre, h.Descripcion);
                 }
-                Console.WriteLine("Ingrese el Id de la HE que desea agregara este personaje por subir de nivel");
+                Console.WriteLine("Ingrese el Id de la HE que desea agregar a este personaje por subir de nivel");
                 int idHE = int.Parse(Console.ReadLine());
                 LaClase.habilidadesEspeciales.Add(m.HabilidadesEspeciales[idHE - 1]);
-
-
             }
 
-            if ((Nivel % 2 != 0) && (Nivel != 1))
+            if ((elPersonaje.Nivel % 2 != 0) && (elPersonaje.Nivel != 1))
             {
-                if (CaracteristicasVariables.Count == 0)
+                if (elPersonaje.CaracteristicasVariables.Count == 0)
                 {
                     Console.WriteLine("No se han ingresado ninguna caracteristica variable a este personaje");
                 }
@@ -96,10 +95,10 @@ namespace PROYECTO1
                     idCV = int.Parse(Console.ReadLine());
                 }
                 CaracteristicasVariables[idCV].valor.valor++;
-                
-               
+                  
             }
-            Nivel++; 
+
+            elPersonaje.Nivel++;
         }
     }
 }
