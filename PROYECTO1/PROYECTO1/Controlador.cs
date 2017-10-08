@@ -708,15 +708,20 @@ namespace PROYECTO1
             if (entrada.Equals("s"))
             {
                 cvaux = CrearCaracteristica();
-                mp.obtenerPersonaje(elnombre).CaracteristicasVariables.Add(cvaux);
+               // mp.obtenerPersonaje(elnombre).CaracteristicasVariables.Add(cvaux);
                 
                 foreach ( Personaje paux in mp.Personajes)
                 {
-                    if (!(paux == mp.obtenerPersonaje(elnombre)))
-                    {
-						mp.obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(personaje.Nombre, cvaux.Nombre).valor = 1;
+                   /* if (!(paux == mp.obtenerPersonaje(elnombre)))
+                    {*/
+						//mp.obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(personaje.Nombre, cvaux.Nombre).valor = 1;
                         paux.CaracteristicasVariables.Add(cvaux);
-                    }
+						mp.Personaje_Caracteristicas.Add(new Personaje_Caracteristica {
+							caracteristicaVariable = cvaux,
+							personaje = paux,
+							valor = 1
+						});
+                   // }
                     
                 }
 
@@ -799,8 +804,6 @@ namespace PROYECTO1
                         mp.Clases[idC - 1].pertenecen.Add(mp.Personajes[id - 1]);
                         Console.WriteLine("Clase cargada con éxito"); 
                     }
-
-
 				}
 
 			}
@@ -973,21 +976,25 @@ namespace PROYECTO1
                         Console.WriteLine("-------------------------Valores Caracteristicas Variables------------------------");
 						//obtengo la raza del personaje para ver si se le agrega el bono a la caracteristica variable correspondiente.
 						Raza raza = p.LaRaza;
-						//obtengo la caracteristica variable a la cual hay que agregarle el bono
-						CaracteristicaVariable caracteristicaVariable = raza.caracteristicaVariable;
-                        foreach (CaracteristicaVariable c in p.CaracteristicasVariables)
-                        {
-							//c.ImprimirCV();
-							//si la caracteristica a imprimir es igual a la que le corresponde el bono por la raza, sumarlo al imprimir
-							if (c.Nombre == caracteristicaVariable.Nombre)
+						CaracteristicaVariable caracteristicaVariable = null;
+						if (raza != null) 
+							//obtengo la caracteristica variable a la cual hay que agregarle el bono
+							caracteristicaVariable = raza.caracteristicaVariable;
+							foreach (CaracteristicaVariable c in p.CaracteristicasVariables)
 							{
-								Console.WriteLine("Id - {0} Nombre - {1} Valor {2} ", c.Id, c.Nombre, mp.obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(p.Nombre, c.Nombre).valor + c.BonoRaza);
+								//c.ImprimirCV();
+								//si la caracteristica a imprimir es igual a la que le corresponde el bono por la raza, sumarlo al imprimir
+								if (caracteristicaVariable!=null && c.Nombre == caracteristicaVariable.Nombre)
+								{
+									Console.WriteLine("Id - {0} Nombre - {1} Valor {2} ", c.Id, c.Nombre, mp.obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(p.Nombre, c.Nombre).valor + c.BonoRaza);
+								}
+								else
+								{
+									Console.WriteLine("Id - {0} Nombre - {1} Valor {2} ", c.Id, c.Nombre, mp.obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(p.Nombre, c.Nombre).valor);
+								}
+
 							}
-							else {
-								Console.WriteLine("Id - {0} Nombre - {1} Valor {2} ", c.Id, c.Nombre, mp.obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(p.Nombre, c.Nombre).valor);
-							}
-							
-						}
+						
                     }
                     if (p.LaClase == null)
                     {

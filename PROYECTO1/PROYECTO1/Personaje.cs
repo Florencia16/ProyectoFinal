@@ -94,7 +94,10 @@ namespace PROYECTO1
                     Console.WriteLine("El valor ingresado no es el correcto");
                     idCV = int.Parse(Console.ReadLine());
                 }
-				Manejador.getInstancia().obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(this.Nombre, Manejador.getInstancia().obtenerCaracteristicaVariablePorId(idCV).Nombre).valor++;
+				if (Manejador.getInstancia().obtenerCaracteristicaVariablePorId(idCV)!=null)
+					Manejador.getInstancia().obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(this.Nombre, Manejador.getInstancia().obtenerCaracteristicaVariablePorId(idCV).Nombre).valor++;
+				else
+					Console.WriteLine("No se encontro la cacateristica variable.");
 
 			}
 
