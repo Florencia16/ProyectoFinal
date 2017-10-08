@@ -74,7 +74,7 @@ namespace PROYECTO1
             }
             else
             {
-                throw new Exception("Ya existe un Habilidad Especial con ese nombre");
+                Console.WriteLine("Ya existe un Habilidad Especial con ese nombre");
             }
         }
         public void AgregarClase(Clase h)

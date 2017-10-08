@@ -45,7 +45,7 @@ namespace PROYECTO1
 
                     case 1:
                         Console.WriteLine("Nombre? ");
-                        string n = Console.ReadLine();
+                        string n = Console.ReadLine().ToLower();
                         while (mp.NomEstaHE(n))
                         {
                             Console.WriteLine("Ya existe una Habilidad especial con ese nombre ");
@@ -79,10 +79,17 @@ namespace PROYECTO1
         public void ListarHabilidadesEspeciales()
         {
             Manejador mp = Manejador.getInstancia();
-            foreach (HabilidadEspecial HE in mp.HabilidadesEspeciales)
+            if(mp.HabilidadesEspeciales.Count == 0)
             {
-                Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", HE.Id, HE.Nombre, HE.Descripcion);
+                Console.WriteLine("No se han ingresado habilidades especiales en el Sistema "); 
+            }else
+            {
+                foreach (HabilidadEspecial HE in mp.HabilidadesEspeciales)
+                {
+                    Console.WriteLine("Id - {0} Nombre - {1} Descripcion - {2} ", HE.Id, HE.Nombre, HE.Descripcion);
+                }
             }
+
 
         }
 
@@ -90,16 +97,25 @@ namespace PROYECTO1
         public void ListarHabilidadEspecialPorClase()
         {
             Manejador mp = Manejador.getInstancia();
-            foreach (Clase c in mp.Clases)
+            if (mp.Clases.Count == 0)
             {
-                Console.WriteLine("Clase Id- {0} Nombre - {1} ", c.Id, c.Nombre);
-                Console.WriteLine("Posee las siguientes Habilidades Especiales: ");
-                foreach (HabilidadEspecial h in c.habilidadesEspeciales)
+                Console.WriteLine("No se han ingresado Clases en el Sistema ");
+            }
+            else
+            {
+                foreach (Clase c in mp.Clases)
                 {
-                    Console.WriteLine("Habilidad Especial Id - {0} Nombre - {1} Descripcion - {2}", h.Id, h.Nombre, h.Descripcion);
+                    Console.WriteLine("Clase Id- {0} Nombre - {1} ", c.Id, c.Nombre);
+                    Console.WriteLine("Posee las siguientes Habilidades Especiales: ");
+                    foreach (HabilidadEspecial h in c.habilidadesEspeciales)
+                    {
+                        Console.WriteLine("Habilidad Especial Id - {0} Nombre - {1} Descripcion - {2}", h.Id, h.Nombre, h.Descripcion);
+                    }
                 }
             }
+        
         }
+
 
         public void EliminarHabilidadEspecial()
         {
@@ -257,9 +273,9 @@ namespace PROYECTO1
 		public void ListarClases()
 		{
 			Manejador mp = Manejador.getInstancia();
-			if (mp.Clases == null)
+			if (mp.Clases.Count==0)
 			{
-				Console.WriteLine("La lista de clases no tiene elementos");
+				Console.WriteLine("No se han ingresado Clases en el Sistema");
 			}
 			else
 			{
@@ -296,10 +312,41 @@ namespace PROYECTO1
 		public Raza CrearRaza()
 		{
 			Manejador mp = Manejador.getInstancia();
+            int IdCV;
 			Console.WriteLine("Ingrese el nombre de la Raza");
 			string nombre = Console.ReadLine();
 			Console.WriteLine("Ingrese una breve descripcion de esta Raza");
 			string descricpion = Console.ReadLine();
+            if (mp.caracteristicasVariables.Count == 0)
+            {
+                Console.WriteLine("No se ha ingrsado ningun caracteristica al sistema, No se podrá realizar el bono por Raza");
+            }
+            else
+            {
+                Console.WriteLine("Ingrese el valor de la mejora para esta Raza");
+                int bono = int.Parse(Console.ReadLine());
+                while (!int.TryParse(Console.ReadLine(), out bono))
+                {
+                    Console.WriteLine("Lo ingresado no es correcto, lo ingresasado deberá ser un número entre 1 y 5");
+                }
+                while ((bono < 1) || (bono > 5))
+                {
+                    Console.WriteLine("El valor de la mejora no se encuentra en el rango 1-5 - Intente nuevamente por favor");
+                    bono = int.Parse(Console.ReadLine());
+                }
+                Console.WriteLine("Esta son las CV ingresadas hasta al momento en el Sistema"); 
+                foreach(CaracteristicaVariable c in mp.caracteristicasVariables)
+                {
+                    Console.WriteLine("Id - {0} Nombre - {1} Valor actual: {2}", c.Id , c.Nombre, c.valor.valor);
+                }
+                Console.WriteLine("Ingrese el Id de la CV que desea realizar la mejora");
+                while (!int.TryParse(Console.ReadLine(), out IdCV))
+                {
+                    Console.WriteLine("Lo ingresado no es correcto, Intente nuevamente por favor");
+                }
+                mp.caracteristicasVariables[IdCV - 1].BonoRaza = bono;
+                Console.WriteLine("Bono cargado con éxito!!!"); 
+            }
             mp.AgregarRaza(new Raza(nombre, descricpion));
 			return(new Raza(nombre, descricpion));
 
@@ -364,9 +411,9 @@ namespace PROYECTO1
 		public void ListarRazas()
 		{
 			Manejador mp = Manejador.getInstancia();
-			if (mp.Razas == null)
+			if (mp.Razas.Count ==0 )
 			{
-				Console.WriteLine("La lista de razas no tiene ingresado ningún objeto.");
+				Console.WriteLine("No se han ingresado Razas en el Sistema");
 			}
 			else
 			{
@@ -387,8 +434,8 @@ namespace PROYECTO1
 			if (mp.NomEstaR(nombreRaza))
 			{
 
-				int posicionR = mp.posicionClase(nombreRaza);
-				Raza raza = mp.Razas[posicionR];
+				int posicionR = mp.posicionR(nombreRaza);
+			    Raza raza = mp.Razas[posicionR];
 				mp.Razas.Remove(raza);
 				Console.WriteLine("La Raza ha sido eliminada con exito");
 			}
@@ -405,11 +452,19 @@ namespace PROYECTO1
 		{
 
 			Manejador mp = Manejador.getInstancia();
-			Console.WriteLine("Ingrese el nombre de la Caracteristica Variable");
+            Personaje_Caracteristica v = new Personaje_Caracteristica();
+
+            Console.WriteLine("Ingrese el nombre de la Caracteristica Variable");
 			string nombre = Console.ReadLine();
-			Console.WriteLine(" Valor?");
-			Personaje_Caracteristica v = new Personaje_Caracteristica();
+			Console.WriteLine("Valor?");
+			
 			v.valor = int.Parse(Console.ReadLine());
+            while ((v.valor < 1) || (v.valor > 10))
+            {
+                Console.WriteLine("Valor ingresado no válido para esta caracterisitca, debe ser entre el rando 1-10");
+                Console.WriteLine("Intente nuevamente");
+                v.valor = int.Parse(Console.ReadLine());
+            }
             mp.AgregarCaracteristicaVariable(new CaracteristicaVariable(nombre, v));
 			return(new CaracteristicaVariable(nombre, v));
 
@@ -462,15 +517,15 @@ namespace PROYECTO1
         public void ListarCaracteristicas()
 		{
 			Manejador mp = Manejador.getInstancia();
-			if (mp.caracteristicasVariables == null)
+			if (mp.caracteristicasVariables.Count==0)
 			{
-				Console.WriteLine("La lista de Caracteristicas Variables esta vacia ");
+				Console.WriteLine("No se ha ingresado ninguna Caracteristica Varibale en el Sistema  ");
 			}
 			else
 			{
 				foreach (CaracteristicaVariable CV in mp.caracteristicasVariables)
 				{
-					Console.WriteLine("Id - {0} Nombre - {1}  ", CV.Id, CV.Nombre);
+                    CV.ImprimirCV();
 				}
 
 			}
@@ -501,18 +556,19 @@ namespace PROYECTO1
 		}
 
 
-		// IMMPORTANTE FUNCONALIDAD CREAR PERSONAJE
-		//Falta ver tema de mayusculas y minusculas con la busqueda de nombre
-
-		public Personaje CrearPersonaje()
+		public void CrearPersonaje()
 		{
 			Manejador mp = Manejador.getInstancia();
 			int niv, fue, des, con, sab, inte, car;
+            CaracteristicaVariable cvaux = new CaracteristicaVariable();
+            Clase claseAux = new Clase(); 
+            Personaje_Caracteristica valoraux = new Personaje_Caracteristica();
+            Raza razaAux = new Raza(); 
 			Console.WriteLine("------------------------------------------------------------------------------");
 			Console.WriteLine("----------------------------Alta Personaje------------------------------------");
 			Console.WriteLine("------------------------------------------------------------------------------");
 			Console.WriteLine("Ingrese Nombre");
-			string elnombre = Console.ReadLine();
+			string elnombre = Console.ReadLine().ToLower();
 			while (mp.NomEstaP(elnombre))
 			{
 				Console.WriteLine("Ya existe en el sistema un Personaje con ese nombre : {0} por favor ingrese otro", elnombre);
@@ -533,7 +589,9 @@ namespace PROYECTO1
 			while ((fue < 1) || (fue > 10))
 			{
 				Console.WriteLine("Valor ingresado para Caracteristica Fuerza no es valido, debe ser entre 1 y 10");
-				fue = int.Parse(Console.ReadLine());
+                Console.WriteLine("Intente nuevamente por favor, ingrese valor");
+
+                fue = int.Parse(Console.ReadLine());
 
 			}
 			Console.WriteLine("Ingrese valor Destreza");
@@ -544,7 +602,9 @@ namespace PROYECTO1
 			while ((des < 1) || (des > 10))
 			{
 				Console.WriteLine("Valor ingresado para Caracteristica Destreaza no es valido, debe ser entre 1 y 10");
-				des = int.Parse(Console.ReadLine());
+                Console.WriteLine("Intente nuevamente por favor, ingrese valor");
+
+                des = int.Parse(Console.ReadLine());
 
 			}
 			Console.WriteLine("Ingrese valor Constitucion");
@@ -555,7 +615,9 @@ namespace PROYECTO1
 			while ((con < 1) || (con > 10))
 			{
 				Console.WriteLine("Valor ingresado para Caracteristica Constitución no es valido, debe ser entre 1 y 10");
-				con = int.Parse(Console.ReadLine());
+                Console.WriteLine("Intente nuevamente por favor, ingrese valor");
+
+                con = int.Parse(Console.ReadLine());
 
 			}
 			Console.WriteLine("Ingrese valor Inteligencia");
@@ -566,7 +628,9 @@ namespace PROYECTO1
 			while ((inte < 1) || (inte > 10))
 			{
 				Console.WriteLine("Valor ingresado para Caracteristica Inteligencia no es valido, debe ser entre 1 y 10");
-				inte = int.Parse(Console.ReadLine());
+                Console.WriteLine("Intente nuevamente por favor, ingrese valor");
+
+                inte = int.Parse(Console.ReadLine());
 
 			}
 			Console.WriteLine("Ingrese valor Sabiduria");
@@ -577,7 +641,9 @@ namespace PROYECTO1
 			while ((sab < 1) || (sab > 10))
 			{
 				Console.WriteLine("Valor ingresado para Caracteristica Sabiduria no es valido, debe ser entre 1 y 10");
-				sab = int.Parse(Console.ReadLine());
+                Console.WriteLine("Intente nuevamente por favor, ingrese valor");
+
+                sab = int.Parse(Console.ReadLine());
 
 			}
 			Console.WriteLine("Ingrese valor Carisma");
@@ -588,24 +654,70 @@ namespace PROYECTO1
 			while ((car < 1) || (car > 10))
 			{
 				Console.WriteLine("Valor ingresado para Caracteristica Carisma no es valido, debe ser entre 1 y 10");
-				car = int.Parse(Console.ReadLine());
+                Console.WriteLine("Intente nuevamente por favor, ingrese valor");
+
+                car = int.Parse(Console.ReadLine());
 
 			}
 			int id = mp.Personajes.Count + 1;
-
 			mp.AgregarPersonaje(new Personaje(id, elnombre, niv, fue, des, con, inte, sab, car));
-			Console.WriteLine("Dese ingresar la Raza de este personaje? S/N");
-			string res = Console.ReadLine();
-			if (res.Equals("S"))
+            if (mp.caracteristicasVariables.Count == 0)
+            {
+                Console.WriteLine("No se han creado ninguna Caracteristica Variable en el Sistema para ingresar valor en este Personaje"); 
+            }
+            else
+            {
+                Console.WriteLine("Ya se han ingresado caracteristicas en el Sistema que serán ingresadas en este Personaje");
+                Console.WriteLine("Ingrese el valor de cada una de ellas para el Personaje {0} ",elnombre); 
+
+                foreach (CaracteristicaVariable cv in mp.caracteristicasVariables)
+                {
+                    Console.WriteLine("Caracteristica Nombre - {0} ", cv.Nombre);
+                    Console.WriteLine("Valor para este Personaje ");
+                    Personaje_Caracteristica v = new Personaje_Caracteristica();
+                    v.valor = int.Parse(Console.ReadLine());
+                    while((v.valor <1)|| (v.valor>10))
+                    {
+                        Console.WriteLine("Valor ingresado no válido para esta caracterisitca, debe ser entre el rando 1-10");
+                        Console.WriteLine("Intente nuevamente");
+                        v.valor = int.Parse(Console.ReadLine());
+                    }
+                    mp.Personajes[id - 1].CaracteristicasVariables.Add(cv); 
+                }
+            }
+            
+            Console.WriteLine("Desea cargar una nueva caracteristica variable?");
+            Console.WriteLine("S/N");
+            string entrada = Console.ReadLine().ToLower();
+            if (entrada.Equals("s"))
+            {
+                cvaux = CrearCaracteristica();
+                mp.Personajes[id - 1].CaracteristicasVariables.Add(cvaux);
+                cvaux.valor.valor = 1; 
+                foreach ( Personaje paux in mp.Personajes)
+                {
+                    if (!(paux.Id == id))
+                    {
+                        paux.CaracteristicasVariables.Add(cvaux);
+                    }
+                    
+                }
+
+            }
+            Console.WriteLine("Dese ingresar la Raza de este personaje? S/N");
+			string res = Console.ReadLine().ToLower();
+			if (res.Equals("s"))
 			{
 				if (mp.Razas.Count == 0)
 				{
-					Console.WriteLine("No se han ingresado ninguna raza al sistema, crea la raza para ser asignada a este personaje");
-					CrearRaza();
-					mp.Personajes[id - 1].LaRaza = mp.Razas[0];
+					Console.WriteLine("No se han ingresado ninguna Raza al sistema, crea la raza para ser asignada a este personaje");
+					razaAux = CrearRaza();
+                    mp.Personajes[id - 1].LaRaza = razaAux; 
 					mp.Razas[0].pertenece.Add(mp.Personajes[id - 1]);
-				}
-				else
+                    Console.WriteLine("Raza cargada con exito");
+
+                }
+                else
 				{
 					ListarRazas();
 					Console.WriteLine("Estas son las razas cargadas en el sistema, favor indica el id  para cargar una existente 0 para crear una nueva raza ");
@@ -615,22 +727,36 @@ namespace PROYECTO1
 						Console.WriteLine("El número de id ingresado no es el correcto - favor ingrese nuevamente ");
 						idR = int.Parse(Console.ReadLine());
 					}
+                    if (idR == 0)
+                    {
+                        razaAux = CrearRaza();
+                        mp.Personajes[id - 1].LaRaza = razaAux;
+                        mp.Razas[mp.Razas.Count-1].pertenece.Add(mp.Personajes[id - 1]);
+                        Console.WriteLine("Raza cargada con exito"); 
+                    }
+                    else
+                    {
+                        mp.Personajes[id - 1].LaRaza = razaAux;
+                        mp.Razas[idR - 1].pertenece.Add(mp.Personajes[id - 1]);
+                        Console.WriteLine("Raza cargada con exito");
 
-					mp.Personajes[id - 1].LaRaza = mp.Razas[idR - 1];
-					mp.Razas[idR - 1].pertenece.Add(mp.Personajes[id - 1]);
 
-				}
+                    }
+
+                }
 			}
+
 			Console.WriteLine("Dese ingresar la Clase de este personaje? S/N");
-			string consola = Console.ReadLine();
-			if (consola.Equals("S"))
+			string consola = Console.ReadLine().ToLower();
+			if (consola.Equals("s"))
 			{
 				if (mp.Clases.Count == 0)
 				{
 					Console.WriteLine("No se han ingresado ninguna Clase al sistema, crea la Clase para ser asignada a este personaje");
-					CrearClase();
-					mp.Personajes[id - 1].LaClase = mp.Clases[0];
+					claseAux = CrearClase();
+					mp.Personajes[id - 1].LaClase = claseAux;
 					mp.Clases[0].pertenecen.Add(mp.Personajes[id - 1]);
+                    Console.WriteLine(" Clase cargada con éxito"); 
 				}
 				else
 				{
@@ -642,26 +768,25 @@ namespace PROYECTO1
 						Console.WriteLine("El número de id ingresado no es el correcto - favor ingrese nuevamente ");
 						idC = int.Parse(Console.ReadLine());
 					}
-					if (idC > 0 && (idC < mp.Clases.Count))
+					if (idC==0)
 					{
-						mp.Personajes[id - 1].LaClase = mp.Clases[idC - 1];
-						mp.Clases[idC - 1].pertenecen.Add(mp.Personajes[id - 1]);
-					}
+                        claseAux = CrearClase();
+                        mp.Personajes[id - 1].LaClase = claseAux;
+                        mp.Clases[0].pertenecen.Add(mp.Personajes[id - 1]);
+                        Console.WriteLine(" Clase cargada con éxito");
+                    }
 					else
 					{
-						Clase ClaseCargar = new Clase();
-						//ClaseCargar = CrearClase();
-						//mp.Personajes[id - 1].LaClase = mp.Clases[0];
-						//mp.Clases[0].pertenecen.Add(mp.Personajes[id - 1]);
-					}
+                        mp.Personajes[id - 1].LaClase = mp.Clases[idC - 1];
+                        mp.Clases[idC - 1].pertenecen.Add(mp.Personajes[id - 1]);
+                        Console.WriteLine("Clase cargada con éxito"); 
+                    }
 
 
 				}
 
 			}
-            Personaje p = new Personaje();
-            return p;
-
+            
 		}
 
 
@@ -698,90 +823,104 @@ namespace PROYECTO1
 				Console.WriteLine("6- Valor de Caracteristica Inteligencia ");
 				Console.WriteLine("7- Valor de Caracteristica Sabiduria ");
 				Console.WriteLine("8- Valor de Caracteristica Carisma ");
-				switch (id)
-				{
-					case '1':
-						Console.WriteLine("Valor?");
-						string nom = Console.ReadLine();
-						mp.Personajes[id - 1].Nombre = nom;
-						Console.WriteLine("Modificación realizada con exito!");
-						break;
-					case '2':
-						int niv;
-						Console.WriteLine("Valor?");
-						while (!int.TryParse(Console.ReadLine(), out niv))
-						{
-							Console.WriteLine("El valor del nivel ingresado no es el correcto");
-						}
-						mp.Personajes[id - 1].Nivel = niv;
-						Console.WriteLine("Modificación realizada con exito!");
-						break;
-					case '3':
-						int fue;
-						Console.WriteLine("Valor?");
-						while (!int.TryParse(Console.ReadLine(), out fue))
-						{
-							Console.WriteLine("El valor de la caracteristica Fuerza ingresado no es el correcto, intente nuevamente");
-						}
-						mp.Personajes[id - 1].Fuerza = fue;
-						Console.WriteLine("Modificación realizada con exito!");
-						break;
-					case '4':
-						int des;
-						Console.WriteLine("Valor?");
-						while (!int.TryParse(Console.ReadLine(), out des))
-						{
-							Console.WriteLine("El valor de la caracteristica Destreza ingresado no es el correcto, intente nuevamente");
-						}
-						mp.Personajes[id - 1].Destreza = des;
-						Console.WriteLine("Modificación realizada con exito!");
-						break;
-					case '5':
-						int cons;
-						Console.WriteLine("Valor?");
-						while (!int.TryParse(Console.ReadLine(), out cons))
-						{
-							Console.WriteLine("El valor de la caracteristica Constitución ingresado no es el correcto, intente nuevamente");
-						}
-						mp.Personajes[id - 1].Constitucion = cons;
-						Console.WriteLine("Modificación realizada con exito!");
-						break;
-					case '6':
-						int inte;
-						Console.WriteLine("Valor?");
-						while (!int.TryParse(Console.ReadLine(), out inte))
-						{
-							Console.WriteLine("El valor de la caracteristica Inteligencia ingresado no es el correcto, intente nuevamente");
-						}
-						mp.Personajes[id - 1].Inteligencia = inte;
-						Console.WriteLine("Modificación realizada con exito!");
-						break;
-					case '7':
-						int sab;
-						Console.WriteLine("Valor?");
-						while (!int.TryParse(Console.ReadLine(), out sab))
-						{
-							Console.WriteLine("El valor de la caracteristica Sabiduaria ingresado no es el correcto, intente nuevamente");
-						}
-						mp.Personajes[id - 1].Sabiduria = sab;
-						Console.WriteLine("Modificación realizada con exito!");
-						break;
-					case '8':
-						int car;
-						Console.WriteLine("Valor?");
-						while (!int.TryParse(Console.ReadLine(), out car))
-						{
-							Console.WriteLine("El valor de la caracteristica Carisma ingresado no es el correcto, intente nuevamente");
-						}
-						mp.Personajes[id - 1].Carisma = car;
-						Console.WriteLine("Modificación realizada con exito!");
-						break;
+                Console.WriteLine("9- Modificar datos Clase ");
+                Console.WriteLine("10- Modificar datos Raza ");
+                Console.WriteLine("11- Modificar datos de Caracteristica Variable ");
+                switch (id)
+                {
+                    case 1:
+                        Console.WriteLine("Valor?");
+                        string nom = Console.ReadLine();
+                        mp.Personajes[id - 1].Nombre = nom;
+                        Console.WriteLine("Modificación realizada con exito!");
+                        break;
+                    case 2:
+                        int niv;
+                        Console.WriteLine("Valor?");
+                        while (!int.TryParse(Console.ReadLine(), out niv))
+                        {
+                            Console.WriteLine("El valor del nivel ingresado no es el correcto");
+                        }
+                        mp.Personajes[id - 1].Nivel = niv;
+                        Console.WriteLine("Modificación realizada con exito!");
+                        break;
+                    case 3:
+                        int fue;
+                        Console.WriteLine("Valor?");
+                        while (!int.TryParse(Console.ReadLine(), out fue))
+                        {
+                            Console.WriteLine("El valor de la caracteristica Fuerza ingresado no es el correcto, intente nuevamente");
+                        }
+                        mp.Personajes[id - 1].Fuerza = fue;
+                        Console.WriteLine("Modificación realizada con exito!");
+                        break;
+                    case 4:
+                        int des;
+                        Console.WriteLine("Valor?");
+                        while (!int.TryParse(Console.ReadLine(), out des))
+                        {
+                            Console.WriteLine("El valor de la caracteristica Destreza ingresado no es el correcto, intente nuevamente");
+                        }
+                        mp.Personajes[id - 1].Destreza = des;
+                        Console.WriteLine("Modificación realizada con exito!");
+                        break;
+                    case 5 :
+                        int cons;
+                        Console.WriteLine("Valor?");
+                        while (!int.TryParse(Console.ReadLine(), out cons))
+                        {
+                            Console.WriteLine("El valor de la caracteristica Constitución ingresado no es el correcto, intente nuevamente");
+                        }
+                        mp.Personajes[id - 1].Constitucion = cons;
+                        Console.WriteLine("Modificación realizada con exito!");
+                        break;
+                    case 6:
+                        int inte;
+                        Console.WriteLine("Valor?");
+                        while (!int.TryParse(Console.ReadLine(), out inte))
+                        {
+                            Console.WriteLine("El valor de la caracteristica Inteligencia ingresado no es el correcto, intente nuevamente");
+                        }
+                        mp.Personajes[id - 1].Inteligencia = inte;
+                        Console.WriteLine("Modificación realizada con exito!");
+                        break;
+                    case 7:
+                        int sab;
+                        Console.WriteLine("Valor?");
+                        while (!int.TryParse(Console.ReadLine(), out sab))
+                        {
+                            Console.WriteLine("El valor de la caracteristica Sabiduaria ingresado no es el correcto, intente nuevamente");
+                        }
+                        mp.Personajes[id - 1].Sabiduria = sab;
+                        Console.WriteLine("Modificación realizada con exito!");
+                        break;
+                    case 8:
+                        int car;
+                        Console.WriteLine("Valor?");
+                        while (!int.TryParse(Console.ReadLine(), out car))
+                        {
+                            Console.WriteLine("El valor de la caracteristica Carisma ingresado no es el correcto, intente nuevamente");
+                        }
+                        mp.Personajes[id - 1].Carisma = car;
+                        Console.WriteLine("Modificación realizada con exito!");
+                        break;
+                    case 9: ModificarClase();
+                        break;
+                    case 10: ModificarRaza();
+                        break;
+                    case 11: ModificarCarateristica();
+                        break;
+                    default: Console.WriteLine("Ese comando no esta predeterminado");
+                        break;
+                    case '0': break;
 				}
 
 			}
 
 
 		}
+
+
 		public void ListarPersonajes()
 		{
 			Manejador mp = Manejador.getInstancia();
@@ -799,7 +938,7 @@ namespace PROYECTO1
 				{
                     Console.WriteLine("-----------------------------------------------------------------------------------------");
                     Console.WriteLine("-----------------------------------------------------------------------------------------");
-                    Console.WriteLine("Id - {0} Nombre - {1} Nivel {3}", p.Id, p.Nombre, p.Nivel);
+                    Console.WriteLine("Id - {0} Nombre - {1} Nivel {2}", p.Id, p.Nombre, p.Nivel);
                     Console.WriteLine("----Valores Caracteristicas Fijas---------");
                     Console.WriteLine("Fuerza ->> {0}", p.Fuerza);
                     Console.WriteLine("Destreza ->> {0}", p.Destreza);
@@ -816,10 +955,10 @@ namespace PROYECTO1
                         Console.WriteLine("-------------------------Valores Caracteristicas Variables------------------------");
                         foreach (CaracteristicaVariable c in p.CaracteristicasVariables)
                         {
-                            Console.WriteLine("Id - {0} Nombre - {1} Valor ->> {2}", c.Id, c.Nombre, c.valor);
+                            c.ImprimirCV();
                         }
                     }
-                    if (p.LaClase.Id == 0)
+                    if (p.LaClase == null)
                     {
                         Console.WriteLine("---------------------No se ha ingresado una clase en este personaje------------------"); 
                     }
@@ -840,7 +979,7 @@ namespace PROYECTO1
                         }
                         
                     }
-                    if (p.LaRaza.Id == 0)
+                    if (p.LaRaza == null)
                     {
                         Console.WriteLine("---------------------No se ha ingresado una raza en este personaje------------------");
                     }
@@ -859,37 +998,51 @@ namespace PROYECTO1
             }
 		}
 
+
 		public void ListarPersonajeClase()
 		{
 			Manejador mp = Manejador.getInstancia();
-			foreach (Clase c in mp.Clases)
-			{
-				Console.WriteLine("Clase Id- {0} Nombre- {1} Descripcion {2}", c.Id, c.Nombre, c.Descripcion);
-				Console.WriteLine("Lista de perosnajes que pertenecen a esta clase -------- ");
-				foreach (Personaje p in c.pertenecen)
-				{
-					Console.WriteLine("Personaje Id- {0} Nombre- {1} Nivel- {2}", p.Id, p.Nombre, p.Nivel);
-				}
-			}
-
-
+            if (mp.Clases.Count == 0)
+            {
+                Console.WriteLine("No se han ingresado Clases en el Sistema");
+            }
+            else
+            {
+                foreach (Clase c in mp.Clases)
+                {
+                    Console.WriteLine("Clase Id- {0} Nombre- {1} Descripcion {2}", c.Id, c.Nombre, c.Descripcion);
+                    Console.WriteLine("Lista de perosnajes que pertenecen a esta clase -------- ");
+                    foreach (Personaje p in c.pertenecen)
+                    {
+                        Console.WriteLine("Personaje Id- {0} Nombre- {1} Nivel- {2}", p.Id, p.Nombre, p.Nivel);
+                    }
+                }
+            }
 		}
 
 
 		public void ListarPersonajeRaza()
 		{
 			Manejador mp = Manejador.getInstancia();
-			foreach (Raza R in mp.Razas)
-			{
-				Console.WriteLine("Raza Id- {0} Nombre- {1} Descripcion {2}", R.Id, R.Nombre, R.Descripcion);
-				Console.WriteLine("Lista de personajes que tienen esta raza  -------- ");
-				foreach (Personaje p in R.pertenece)
-				{
-					Console.WriteLine("Personaje Id- {0} Nombre- {1} Nivel- {2}", p.Id, p.Nombre, p.Nivel);
-				}
-			}
-		}
+            if (mp.Razas.Count == 0)
+            {
+                Console.WriteLine("No se han ingresado Razas en el Sistema ");
+            }
+            else
+            {
+                foreach (Raza R in mp.Razas)
+                {
+                    Console.WriteLine("Raza Id- {0} Nombre- {1} Descripcion {2}", R.Id, R.Nombre, R.Descripcion);
+                    Console.WriteLine("Lista de personajes que tienen esta raza  -------- ");
+                    foreach (Personaje p in R.pertenece)
+                    {
+                        Console.WriteLine("Personaje Id- {0} Nombre- {1} Nivel- {2}", p.Id, p.Nombre, p.Nivel);
+                    }
+                }
 
+            }
+			
+		}
 
 
 		public void EliminarPersonaje()
@@ -918,51 +1071,37 @@ namespace PROYECTO1
 
 		}
 
-		public void SubirNivel(Personaje elPersonje)
+
+		public void SubirNivel()
 		{
 			Manejador mp = Manejador.getInstancia();
 			Personaje p = new Personaje();
 			int id;
-			if (mp.Personajes.Count == 0)
-			{
-				Console.WriteLine("No se han ingresado ningún personaje al sistema, debe ingresar un personaje primero");
-			}
-			else
-			{
-				ListarPersonajes();
-				Console.WriteLine("Ingrese el Id del Personaje a subir de nivel ");
-				while (!int.TryParse(Console.ReadLine(), out id))
-				{
-					Console.WriteLine("El valor ingresado de Id no es correcto, intente nuevamente por favor ");
-				}
-				while ((id < 0) || (id > mp.Personajes.Count))
-				{
-					Console.WriteLine("El valor ingresado Id no es el corrrector, esta fuera de rango, intente nuevamente por favor");
-				}
-				if ((mp.Personajes[id - 1].Nivel % 2 != 0) && (mp.Personajes[id - 1].Nivel != 1))
-				{
-					Console.WriteLine("Personaje Id - {0} Nombre - {1}", mp.Personajes[id - 1].Id, mp.Personajes[id - 1].Nombre);
-					Console.WriteLine("Este personaje posee las siguientes Habilidades Especiales");
-					Console.WriteLine();
+            if (mp.Personajes.Count == 0)
+            {
+                Console.WriteLine("No se han ingresado ningún personaje al sistema, debe ingresar un personaje primero");
+            }
+            else
+            {
+                ListarPersonajes();
+                Console.WriteLine("Ingrese el Id del Personaje a subir de nivel ");
+                while (!int.TryParse(Console.ReadLine(), out id))
+                {
+                    Console.WriteLine("El valor ingresado de Id no es correcto, intente nuevamente por favor ");
+                }
+                while ((id < 0) || (id > mp.Personajes.Count))
+                {
+                    Console.WriteLine("El valor ingresado Id no es el corrrecto, esta fuera de rango, intente nuevamente por favor");
+                }
 
-					if (mp.Personajes[id - 1].LaClase.habilidadesEspeciales.Count == 0)
-					{
-						Console.WriteLine("No se ha ingresado ninguna habilidad especial para la Clase {0} la cual posee este Personaje", mp.Personajes[id - 1].LaClase.Nombre);
-						Console.WriteLine("Ingrese una nueva HE que será registrada en esta clase");
-						CrearHabilidadEspecial();
-
-						//crear habilidad especial debera devolver una habilidad especial
-					}
-					foreach (HabilidadEspecial HE in mp.Personajes[id - 1].LaClase.habilidadesEspeciales)
-					{
-						Console.WriteLine("HE Id - {0} Nombre - {1} Descripcion - {2}", HE.Id, HE.Nombre, HE.Descripcion);
-					}
-					Console.WriteLine();
-				}
-
-			}
-
-
+                p.AumentarNivel();
+                Console.WriteLine("El nivel ha sido aumentado con exito al Personaje {0}", p.Nombre); 
+            }
 		}
+
+
+
 	}
+
+
 }

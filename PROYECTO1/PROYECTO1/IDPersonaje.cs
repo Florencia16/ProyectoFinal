@@ -25,12 +25,12 @@ namespace PROYECTO1
         void ModificarCarateristica();
         void ListarCaracteristicas();
         void EliminarCaracteristica();
-        Personaje CrearPersonaje();
+        void CrearPersonaje();
         void ModificarPersonaje();
         void ListarPersonajes();
         void ListarPersonajeRaza();
         void ListarPersonajeClase();
         void EliminarPersonaje();
-        
+        void SubirNivel(); 
     }
 }

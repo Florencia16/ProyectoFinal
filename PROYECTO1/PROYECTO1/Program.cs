@@ -36,8 +36,15 @@ namespace PROYECTO1
 				Console.WriteLine("14- LISTAR RAZA");
 				Console.WriteLine("15- MODIFICAR RAZA");
 				Console.WriteLine("16- ELIMINAR RAZA");
+                Console.WriteLine("17- Subir de Nivel");
+                Console.WriteLine("18- Crear Caracteristica");
+                Console.WriteLine("19- Modificar Caracteristica");
+                Console.WriteLine("20- ListarCaracteristica");
 
-				Console.WriteLine("Ingrese la opción deseada:  ");
+                Console.WriteLine("21- Eliminar Caracteristica");
+
+
+                Console.WriteLine("Ingrese la opción deseada:  ");
 				while (!int.TryParse(Console.ReadLine(), out opcion))
 				{
 					Console.WriteLine("El valor ingresado de Id no es correcto, intente nuevamente por favor ");
@@ -99,6 +106,16 @@ namespace PROYECTO1
 					case 16:
 						controlador.EliminarRaza();
 						break;
+                    case 17:  controlador.SubirNivel();
+                        break;
+                    case 18: controlador.CrearCaracteristica();
+                        break;
+                    case 19: controlador.ModificarCarateristica();
+                        break;
+                    case 20: controlador.ListarCaracteristicas();
+                        break;
+                    case 21: controlador.EliminarCaracteristica();
+                        break; 
 					default:
 						Console.WriteLine("La opcion ingresada no es correcta - intenta nuevamente!!!");
 						break;
