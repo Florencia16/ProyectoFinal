@@ -16,42 +16,93 @@ namespace PROYECTO1
 			while (opcion != 0)
 			{
 				Console.Clear();
+
+				Console.ForegroundColor = ConsoleColor.DarkRed;
+				Console.WriteLine("                                           `-+s:`                                         ");
+				Console.WriteLine("                                        -ohNm+`                                          ");
+				Console.WriteLine("                                     :smMMNo`                                              ");
+				Console.WriteLine("                                  .omMMMMy.                                              ");
+				Console.WriteLine("                                :yNMMMMMh:`                                               ");
+				Console.WriteLine("                              `/dNMMMMMms/-..-::..-:/+osyyhhdddmmmNmdhso/-.               ");
+				Console.WriteLine("                    .:+syyyo/+dMMMMMMMmyydmmNNNNNNNMMMMMMMMMMNmhyo/-``                    ");
+				Console.WriteLine("                   .sddhhNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmhs+:-.`                         ");
+				Console.WriteLine("                   :-.```oMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNmmmmmdhyso/:.                   ");
+				Console.WriteLine("                       `/mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNs:..```                      ");
+				Console.WriteLine("                     `/hNMmdhMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMms-                          ");
+				Console.WriteLine("                 `-/ymNms:-+mMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMMMMMMNs.                        ");
+				Console.WriteLine("                /dNMMMh/:/dMMMMMMMMMMMMd+oydNMMMMMMMMMMMMMNyydNMMMm+`                      ");
+				Console.WriteLine("            `./yNMMMMMMMMMMMMMMMMMmsNMN+s` `-/smMMMMMMMMMMMd.`./ymMMh.                     ");
+				Console.WriteLine("        `-+ydNMMMMMMMMMMMMMMMMMMMN+ :dM:       `+mMMMMMMMMMMm.   .+dMm:                    ");
+				Console.WriteLine("       -hNMMMMMMMMMMMMMMMMMMNNmds-   `y/         sMMMMMMMMMMMd.    `+dm:                   ");
+				Console.WriteLine("       hMMMMMMMNmhyso+++///::-.`      ``      `-oNMMMMMMMMMMMMh`     `+d:                  ");
+				Console.WriteLine("      hMMMMMMMNmhyso+++///::-.`      ``      `-oNMMMMMMMMMMMMh`     `+d:                  ");
+				Console.WriteLine("      sNMMMMd+-`                       ``.-+sdNMMMMMMMMMMMMMMMo       `:`                 ");
+				Console.WriteLine("       /ydh+`               ````..-:+oyhdNMMMMMMMMMMMMMMMMMMMMN-                          ");
+				Console.WriteLine("                :ossssssyyhhhdmmNMMMMMMMMMMMMMMMMMMMMMMMMNMMMMMh                          ");
+				Console.WriteLine("                 `/hNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNy/:dMMMMN-                         ");
+				Console.WriteLine("                 `-+mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNd+.   .dMMMM+                         ");
+				Console.WriteLine("              `/ymMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNy:       /MMMMy                         ");
+				Console.WriteLine("           `/hNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNh/`         `MMMMs                         ");
+				Console.WriteLine("          -yNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNh+.            `NMMM+                         ");
+				Console.WriteLine("        :hMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmy/`               `MMMm`                         ");
+				Console.WriteLine("      .hMMMMMMMMMMMMMMMMMMdo:-.`:dMNmho/.                   .MMm-                          ");
+				Console.WriteLine("     /NMMMMMMMMMMMMMMMMMy.    `:/:.`                        /Ny.                           ");
 				Console.WriteLine("------------------------------------------------------------------------------");
 				Console.WriteLine("---------------------------BIENVENIDO-----------------------------------------");
 				Console.WriteLine("------------------------------------------------------------------------------");
+				Console.ForegroundColor = ConsoleColor.Yellow;
 				Console.WriteLine("0- SALIR");
-				Console.WriteLine("1- HABILIDAD ESPECIAL CREAR  ");
-				Console.WriteLine("2- HABILIDAD ESPECIAL MODIFICAR  ");
-				Console.WriteLine("3- HABILIDAD ESPECIAL LISTAR  ");
-				Console.WriteLine("4- HABILIDAD ESPECIAL ELIMINAR  ");
-				Console.WriteLine("5- CLASE CREAR  ");
-				Console.WriteLine("6- CLASE MODIFICAR  ");
-				Console.WriteLine("7- CLASE LISTAR");
-				Console.WriteLine("8- CLASE ELIMINAR");
-				Console.WriteLine("9- CREAR PERSONAJE");
-				Console.WriteLine("10- LISTAR PERSONAJE POR CLASE ");
-				Console.WriteLine("11- LISTAR PERSONAJE POR RAZA");
-				Console.WriteLine("12- LISTAR PERSONAJES");
-				Console.WriteLine("13- CREAR RAZA");
-				Console.WriteLine("14- LISTAR RAZA");
-				Console.WriteLine("15- MODIFICAR RAZA");
-				Console.WriteLine("16- ELIMINAR RAZA");
-                Console.WriteLine("17- Subir de Nivel");
-                Console.WriteLine("18- Crear Caracteristica");
-                Console.WriteLine("19- Modificar Caracteristica");
-                Console.WriteLine("20- ListarCaracteristica");
+				Console.ForegroundColor = ConsoleColor.Blue;
+				Console.WriteLine("OPCIONES HABILIDADES ESPECIALES");
+				Console.ForegroundColor = ConsoleColor.Magenta;
+				Console.WriteLine("1- CREAR  ");
+				Console.WriteLine("2- MODIFICAR  ");
+				Console.WriteLine("3- LISTAR  ");
+				Console.WriteLine("4- ELIMINAR  ");
+				Console.ForegroundColor = ConsoleColor.Blue;
+				Console.WriteLine("OPCIONES CLASES");
+				Console.ForegroundColor = ConsoleColor.Magenta;
+				Console.WriteLine("5- CREAR  ");
+				Console.WriteLine("6-  MODIFICAR  ");
+				Console.WriteLine("7-  LISTAR");
+				Console.WriteLine("8-  ELIMINAR");
+				Console.ForegroundColor = ConsoleColor.Blue;
+				Console.WriteLine("OPCIONES PERSONAJES");
+				Console.ForegroundColor = ConsoleColor.Magenta;
+				Console.WriteLine("9- CREAR ");
+				Console.WriteLine("10- LISTAR POR CLASE ");
+				Console.WriteLine("11- LISTAR POR RAZA");
+				Console.WriteLine("12- LISTAR ");
+				Console.ForegroundColor = ConsoleColor.Blue;
+				Console.WriteLine("OPCIONES RAZA");
+				Console.ForegroundColor = ConsoleColor.Magenta;
+				Console.WriteLine("13- CREAR ");
+				Console.WriteLine("14- LISTAR ");
+				Console.WriteLine("15- MODIFICAR ");
+				Console.WriteLine("16- ELIMINAR ");
+				Console.ForegroundColor = ConsoleColor.Blue;
+				Console.WriteLine("OPCIONES NIVEL");
+				Console.ForegroundColor = ConsoleColor.Magenta;
+				Console.WriteLine("17- Subir ");
+				Console.ForegroundColor = ConsoleColor.Blue;
+				Console.WriteLine("OPCIONES CARACTERISTICAS");
+				Console.ForegroundColor = ConsoleColor.Magenta;
+				Console.WriteLine("18- Crear");
+                Console.WriteLine("19- Modificar");
+                Console.WriteLine("20- Listar");
+				 Console.WriteLine("21- Eliminar Caracteristica");
 
-                Console.WriteLine("21- Eliminar Caracteristica");
-
-
-                Console.WriteLine("Ingrese la opción deseada:  ");
+				Console.ForegroundColor = ConsoleColor.Yellow;
+				Console.WriteLine("Ingrese la opción deseada:  ");
 				while (!int.TryParse(Console.ReadLine(), out opcion))
 				{
-					Console.WriteLine("El valor ingresado de Id no es correcto, intente nuevamente por favor ");
+					Console.ForegroundColor = ConsoleColor.DarkGreen;
+					Console.WriteLine("La opccion ingresada no es correcta, intente nuevamente por favor ");
 				}
 				switch (opcion)
 				{
 					case 0:
+						Console.ForegroundColor = ConsoleColor.DarkGreen;
 						Console.WriteLine("El programa ah finalizado");
 						break;
 					case 1:
@@ -117,9 +168,11 @@ namespace PROYECTO1
                     case 21: controlador.EliminarCaracteristica();
                         break; 
 					default:
+						Console.ForegroundColor = ConsoleColor.DarkGreen;
 						Console.WriteLine("La opcion ingresada no es correcta - intenta nuevamente!!!");
 						break;
 				}
+				Console.ForegroundColor = ConsoleColor.DarkGreen;
 				Console.WriteLine("Presione una tecla para continuar...");
 				Console.ReadKey();
 			}
