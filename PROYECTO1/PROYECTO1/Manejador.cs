@@ -14,7 +14,8 @@ namespace PROYECTO1
 
         public List<CaracteristicaVariable> caracteristicasVariables;
         public List<HabilidadEspecial> HabilidadesEspeciales;
-        public List<Clase> Clases;
+		public List<Personaje_Caracteristica> Personaje_Caracteristicas;
+		public List<Clase> Clases;
         private Manejador()
         {
             this.Personajes = new List<Personaje>();
@@ -22,6 +23,7 @@ namespace PROYECTO1
             this.HabilidadesEspeciales = new List<HabilidadEspecial>();
             this.Clases = new List<Clase>();
             this.caracteristicasVariables = new List<CaracteristicaVariable>();
+			this.Personaje_Caracteristicas = new List<Personaje_Caracteristica>();
         }
         private static Manejador instancia;
 
@@ -208,6 +210,41 @@ namespace PROYECTO1
 			return null;
 		}
 
+		public List<Personaje_Caracteristica> obtenerPersonaje_CaracteristicasPorPersonaje(string nombre)
+		{
+			List<Personaje_Caracteristica> personajes_caracteristicas = new List<Personaje_Caracteristica>();
+			foreach (Personaje_Caracteristica personaje_caracteristica in Personaje_Caracteristicas)
+			{
+				if (personaje_caracteristica.personaje.Nombre == nombre) personajes_caracteristicas.Add(personaje_caracteristica);
+			}
+			return personajes_caracteristicas;
+		}
+
+		public Personaje_Caracteristica obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(string nombrePersonaje, string nombreCaracteristica)
+		{
+			foreach (Personaje_Caracteristica personaje_caracteristica in Personaje_Caracteristicas)
+			{
+				if (personaje_caracteristica.personaje.Nombre == nombrePersonaje && personaje_caracteristica.caracteristicaVariable.Nombre == nombreCaracteristica) return personaje_caracteristica;
+			}
+			return null;
+		}
+
+		public Raza obtrenerRazaPorId(int idRaza)
+		{
+			foreach (Raza raza in Razas)
+			{
+				if (raza.Id == idRaza) return raza;
+			}
+			return null;
+		}
+
+		public CaracteristicaVariable obtenerCaracteristicaVariablePorId(int idCaracteristicaVariable) {
+			foreach (CaracteristicaVariable caracteristicasVariable in caracteristicasVariables)
+			{
+				if (caracteristicasVariable.Id == idCaracteristicaVariable) return caracteristicasVariable;
+			}
+			return null;
+		}
 	}
 }
 

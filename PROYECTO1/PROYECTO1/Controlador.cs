@@ -317,6 +317,7 @@ namespace PROYECTO1
 			string nombre = Console.ReadLine();
 			Console.WriteLine("Ingrese una breve descripcion de esta Raza");
 			string descricpion = Console.ReadLine();
+			CaracteristicaVariable caracteristicaVariable = null;
             if (mp.caracteristicasVariables.Count == 0)
             {
                 Console.WriteLine("No se ha ingrsado ningun caracteristica al sistema, No se podrá realizar el bono por Raza");
@@ -337,19 +338,20 @@ namespace PROYECTO1
                 Console.WriteLine("Esta son las CV ingresadas hasta al momento en el Sistema"); 
                 foreach(CaracteristicaVariable c in mp.caracteristicasVariables)
                 {
-                    Console.WriteLine("Id - {0} Nombre - {1} Valor actual: {2}", c.Id , c.Nombre, c.valor.valor);
+                    Console.WriteLine("Id - {0} Nombre - {1}", c.Id , c.Nombre);
                 }
-                Console.WriteLine("Ingrese el Id de la CV que desea realizar la mejora");
+                Console.WriteLine("Ingrese el Id de la Caracteristica Variable que desea realizar la mejora");
                 while (!int.TryParse(Console.ReadLine(), out IdCV))
                 {
                     Console.WriteLine("Lo ingresado no es correcto, Intente nuevamente por favor");
                 }
-                mp.caracteristicasVariables[IdCV - 1].BonoRaza = bono;
+				caracteristicaVariable = mp.caracteristicasVariables[IdCV - 1];
+				mp.caracteristicasVariables[IdCV - 1].BonoRaza = bono;
                 Console.WriteLine("Bono cargado con éxito!!!"); 
             }
-            mp.AgregarRaza(new Raza(nombre, descricpion));
-			return(new Raza(nombre, descricpion));
-
+			Raza raza = new Raza(nombre, descricpion, caracteristicaVariable);
+			mp.AgregarRaza(raza);
+			return raza;
 		}
 
 
@@ -448,25 +450,37 @@ namespace PROYECTO1
 		}
 
 
-		public CaracteristicaVariable CrearCaracteristica()
+		public CaracteristicaVariable CrearCaracteristica() {
+			return CrearCaracteristica(null);
+		}
+
+		public CaracteristicaVariable CrearCaracteristica(Personaje personaje)
 		{
 
 			Manejador mp = Manejador.getInstancia();
-            Personaje_Caracteristica v = new Personaje_Caracteristica();
-
             Console.WriteLine("Ingrese el nombre de la Caracteristica Variable");
 			string nombre = Console.ReadLine();
-			Console.WriteLine("Valor?");
+
+			CaracteristicaVariable caracteristicaVariable = new CaracteristicaVariable(nombre);
+
+			//si hay personaje entonces se crea la caractreristica varable para el mismo
+			if (personaje != null) {
+				Personaje_Caracteristica v = new Personaje_Caracteristica();
+				Console.WriteLine("Valor?");
+				v.valor = int.Parse(Console.ReadLine());
+				while ((v.valor < 1) || (v.valor > 10))
+				{
+					Console.WriteLine("Valor ingresado no válido para esta caracterisitca, debe ser entre el rando 1-10");
+					Console.WriteLine("Intente nuevamente");
+					v.valor = int.Parse(Console.ReadLine());
+					v.caracteristicaVariable = caracteristicaVariable;
+					v.personaje = personaje;
+					mp.Personaje_Caracteristicas.Add(v);
+				}
+			}
 			
-			v.valor = int.Parse(Console.ReadLine());
-            while ((v.valor < 1) || (v.valor > 10))
-            {
-                Console.WriteLine("Valor ingresado no válido para esta caracterisitca, debe ser entre el rando 1-10");
-                Console.WriteLine("Intente nuevamente");
-                v.valor = int.Parse(Console.ReadLine());
-            }
-            mp.AgregarCaracteristicaVariable(new CaracteristicaVariable(nombre, v));
-			return(new CaracteristicaVariable(nombre, v));
+            mp.AgregarCaracteristicaVariable(caracteristicaVariable);
+			return(caracteristicaVariable);
 
 		}
 
@@ -660,7 +674,8 @@ namespace PROYECTO1
 
 			}
 			int id = mp.Personajes.Count + 1;
-			mp.AgregarPersonaje(new Personaje(id, elnombre, niv, fue, des, con, inte, sab, car));
+			Personaje personaje = new Personaje(id, elnombre, niv, fue, des, con, inte, sab, car);
+			mp.AgregarPersonaje(personaje);
             if (mp.caracteristicasVariables.Count == 0)
             {
                 Console.WriteLine("No se han creado ninguna Caracteristica Variable en el Sistema para ingresar valor en este Personaje"); 
@@ -682,7 +697,10 @@ namespace PROYECTO1
                         Console.WriteLine("Intente nuevamente");
                         v.valor = int.Parse(Console.ReadLine());
                     }
-                    mp.Personajes[id - 1].CaracteristicasVariables.Add(cv); 
+                    mp.Personajes[id - 1].CaracteristicasVariables.Add(cv);
+					mp.Personaje_Caracteristicas.Add(v);
+					v.caracteristicaVariable = cv;
+					v.personaje = personaje;
                 }
             }
             
@@ -691,14 +709,14 @@ namespace PROYECTO1
             string entrada = Console.ReadLine().ToLower();
             if (entrada.Equals("s"))
             {
-                cvaux = CrearCaracteristica();
+                cvaux = CrearCaracteristica(personaje);
                 mp.Personajes[id - 1].CaracteristicasVariables.Add(cvaux);
                 
                 foreach ( Personaje paux in mp.Personajes)
                 {
                     if (!(paux.Id == id))
                     {
-                        cvaux.valor.valor = 1;
+						mp.obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(personaje.Nombre, cvaux.Nombre).valor = 1;
                         paux.CaracteristicasVariables.Add(cvaux);
                     }
                     
@@ -737,7 +755,8 @@ namespace PROYECTO1
                     }
                     else
                     {
-                        mp.Personajes[id - 1].LaRaza = razaAux;
+						razaAux = mp.obtrenerRazaPorId(idR);
+						mp.Personajes[id - 1].LaRaza = razaAux;
                         mp.Razas[idR - 1].pertenece.Add(mp.Personajes[id - 1]);
                         Console.WriteLine("Raza cargada con exito");
 
@@ -954,10 +973,23 @@ namespace PROYECTO1
                     else
                     {
                         Console.WriteLine("-------------------------Valores Caracteristicas Variables------------------------");
+						//obtengo la raza del personaje para ver si se le agrega el bono a la caracteristica variable correspondiente.
+						Raza raza = p.LaRaza;
+						//obtengo la caracteristica variable a la cual hay que agregarle el bono
+						CaracteristicaVariable caracteristicaVariable = raza.caracteristicaVariable;
                         foreach (CaracteristicaVariable c in p.CaracteristicasVariables)
                         {
-                            c.ImprimirCV();
-                        }
+							//c.ImprimirCV();
+							//si la caracteristica a imprimir es igual a la que le corresponde el bono por la raza, sumarlo al imprimir
+							if (c.Nombre == caracteristicaVariable.Nombre)
+							{
+								Console.WriteLine("Id - {0} Nombre - {1} Valor {2} ", c.Id, c.Nombre, mp.obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(p.Nombre, c.Nombre).valor + c.BonoRaza);
+							}
+							else {
+								Console.WriteLine("Id - {0} Nombre - {1} Valor {2} ", c.Id, c.Nombre, mp.obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(p.Nombre, c.Nombre).valor);
+							}
+							
+						}
                     }
                     if (p.LaClase == null)
                     {

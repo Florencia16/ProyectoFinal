@@ -81,7 +81,7 @@ namespace PROYECTO1
                 Console.WriteLine("Caracteristicas Variables existentes en este Personaje: ");
                 foreach (CaracteristicaVariable c in CaracteristicasVariables)
                 {
-                    if (!(c.valor.valor == 10))
+                    if (!(Manejador.getInstancia().obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(this.Nombre, c.Nombre).valor == 10))
                     {
                         c.ImprimirCV();
 
@@ -94,9 +94,9 @@ namespace PROYECTO1
                     Console.WriteLine("El valor ingresado no es el correcto");
                     idCV = int.Parse(Console.ReadLine());
                 }
-                CaracteristicasVariables[idCV].valor.valor++;
-                  
-            }
+				Manejador.getInstancia().obtenerPersonaje_CaracteristicasPorPersonajeYCaracteristica(this.Nombre, Manejador.getInstancia().obtenerCaracteristicaVariablePorId(idCV).Nombre).valor++;
+
+			}
 
             this.Nivel++;
         }
