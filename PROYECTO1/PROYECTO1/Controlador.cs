@@ -495,7 +495,7 @@ namespace PROYECTO1
 			{
 
 				int posicionC = mp.posicionC(nombreCaracteristica);
-				Clase clase = mp.Clases[posicionC];
+				Clase clase = mp.Clases[posicionC-1];
 				Console.WriteLine("Ingrese el parametro que desea modificar");
 				Console.WriteLine("1-Nombre");
 				int opcion = 0;
@@ -556,7 +556,7 @@ namespace PROYECTO1
 			{
 
 				int posicionCaracteristica = mp.posicionC(nombreCaracteristica);
-				CaracteristicaVariable caracteristicaVariable = mp.caracteristicasVariables[posicionCaracteristica];
+				CaracteristicaVariable caracteristicaVariable = mp.caracteristicasVariables[posicionCaracteristica-1];
 				mp.caracteristicasVariables.Remove(caracteristicaVariable);
 				Console.WriteLine("la Caracteristica ha sido eliminada con exito");
 			}
