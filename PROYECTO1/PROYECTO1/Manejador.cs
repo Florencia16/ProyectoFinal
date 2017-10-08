@@ -117,17 +117,7 @@ namespace PROYECTO1
 		{
 			return (caracteristicasVariables.Exists(x => x.Nombre == nombre));
 		}
-        public int posicionCV (String nombre)
-        {
-            int pos = 0;
-            foreach (CaracteristicaVariable c in caracteristicasVariables)
-            {
-
-            }
-
-                return pos; 
-        }
-
+       
 
 		public int posicionR(String nombre)
         {

@@ -90,9 +90,9 @@ namespace PROYECTO1
 				Console.WriteLine("18- Crear");
                 Console.WriteLine("19- Modificar");
                 Console.WriteLine("20- Listar");
-				 Console.WriteLine("21- Eliminar Caracteristica");
-
-				Console.ForegroundColor = ConsoleColor.Yellow;
+				Console.WriteLine("21- Eliminar Caracteristica");
+                
+                Console.ForegroundColor = ConsoleColor.Yellow;
 				Console.WriteLine("Ingrese la opción deseada:  ");
 				Console.ForegroundColor = ConsoleColor.Cyan;
 				while (!int.TryParse(Console.ReadLine(), out opcion))
